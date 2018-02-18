@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}GestEvent{% endblock %}</title>
+        {% block stylesheets %}
+        <link rel="stylesheet" type="text/css" href="{{asset('css/materialize.min.css')}}">
+
+        {% endblock %}
+         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+
+    </head>
+    <body>
+        {% block body %}
+        
+        {% endblock %}
+        {% block javascripts %}
+            <javascript src="{{asset('js/materialize.min.js')}}"></javascript>
+            <javascript src="{{asset('js/jquery.min.js')}}"></javascript>
+        {% endblock %}
+    </body>
+</html>
