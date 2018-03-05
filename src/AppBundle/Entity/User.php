@@ -24,6 +24,7 @@ class User extends FosUser
     public function __construct()
     {
         parent::__construct();
+        $this->events = new ArrayCollection();
     }
 
     /**
@@ -41,8 +42,6 @@ class User extends FosUser
     private $firstname;
 
     
-
-
     /**
      * Get id
      *
@@ -51,6 +50,7 @@ class User extends FosUser
     public function getId()
     {
         return $this->id;
+        
     }
 
     /**
@@ -101,5 +101,26 @@ class User extends FosUser
         return $this->firstname;
     }
 
+    /**
+     * @ORM\OneToMany(targetEntity ="Event", mappedBy="user")
+     */
+    private $events;
+    /**
+     * @return Collection|Event[]
+     */
+    public function getEvents(){
+        return $this->events;
+    }
+
+    /**
+     * @ORM\OneToMany(targetEntity ="Inscription", mappedBy="user")
+     */
+    private $inscriptions;
+    /**
+     * @return Collection|Inscriptions[]
+     */
+    public function getInscriptions(){
+        return $this->inscriptions;
+    }
 }
 
