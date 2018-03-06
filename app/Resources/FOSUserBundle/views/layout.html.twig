@@ -1,14 +1,13 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8" />
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+{% extends 'base.html.twig' %}
 
-    </head>
-    <body>
+{% block body %}
+    <div class="row ">
+        {# <h5 class="card-header">{{'login.title'|trans}}</h5> #}
+        <div class="mx-auto" >
         <div>
             {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
-                {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }} |
+                {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }}
+                |
                 <a href="{{ path('fos_user_security_logout') }}">
                     {{ 'layout.logout'|trans({}, 'FOSUserBundle') }}
                 </a>
@@ -27,13 +26,11 @@
             {% endfor %}
         {% endif %}
 
-        <div>
-            {% block fos_user_content %}
-            {% endblock fos_user_content %}
-        </div>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <div >
 
-            <!-- Latest compiled JavaScript -->
-            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    </body>
-</html>
+            {% block fos_user_content %}{% endblock fos_user_content %}
+
+        </div>
+    </div>
+</div>
+{% endblock %}
