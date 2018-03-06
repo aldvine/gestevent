@@ -6,6 +6,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Entity\Event;
+use AppBundle\Entity\User;
+use AppBundle\Form\EventType;
 /**
  * @Route("/{_locale}/event")
  */
@@ -34,9 +36,12 @@ class EventController extends Controller
     public function newAction(User $user, Request $request)
     {
         $event = new Event();
+        echo $user->getId();
         $form = $this->createForm(EventType::class, $event, [
-            'action' => $this->generateUrl('addEvent',['id'=>$user->getId()])]);
+            'action' => $this->generateUrl('addEvent')]);
+        echo "2-";
         $form->handleRequest($request);
+        echo "3-";
         if (!$form->isSubmitted() || !$form->isValid()){
             return $this->render('event/new.html.twig', [
                 'add_event_form' => $form->createView(),
@@ -69,14 +74,18 @@ class EventController extends Controller
      */
     public function updateAction(Event $event, Request $request)
     {
+        echo 'test';
         $form = $this->createForm(EventType::class, $event);
+        echo '   1-';
         $form->handleRequest($request);
-
+        echo '   2-';
         if (!$form->isSubmitted() || !$form->isValid()){
+            echo '   3-';
             return $this->render('event/edit.html.twig', [
                 'event' => $event,
                 'edit_event_form' => $form->createView(),
             ]);
+            echo '   4-';
         }
 
         $em = $this->getDoctrine()->getManager();
@@ -91,8 +100,6 @@ class EventController extends Controller
     {
         $repository = $this->getDoctrine()->getRepository(Event::class);
         $event = $repository->find($event->getId());
-        dump($event);
-        return $this->render('event/show.html.twig', ['events'=>$event]);
+        return $this->render('event/show.html.twig', ['event'=>$event]);
     }
 }
-b

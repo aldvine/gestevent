@@ -6,13 +6,13 @@
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
       <li class="nav-item ">
-        <a class="nav-link" href="#">{{'home'|trans}} </a>
+        <a class="nav-link" href="{{ path('homepage') }}">{{'home'|trans}} </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">{{'events'|trans}}</a>
+        <a class="nav-link" href="{{ path('Event_index') }}">{{'events'|trans}}</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Inscriptions</a>
+        <a class="nav-link" href="{{ path('newInscription') }}">Inscriptions</a>
       </li>
     </ul>
   </div>
