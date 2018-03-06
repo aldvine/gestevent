@@ -7,10 +7,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Entity\Event;
 
+/**
+ * @Route("/{_locale}/Event")
+ */
+
 class EventController extends Controller
 {
     /**
-     * @Route("/Event/", name="listEvent")
+     * @Route("/", name="listEvent")
      */
     public function listAction(Request $request)
     {
@@ -23,8 +27,10 @@ class EventController extends Controller
     }
 
      /**
-     * @Route("/Event/new", name="addEvent")
+     * @Route("/new", name="addEvent")
      */
+
+//exemple a modifier et adapater
     public function newAction()
     {
         $event = new Event();
