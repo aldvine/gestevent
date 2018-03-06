@@ -16,7 +16,10 @@
 
     </head>
     <body>
+
+   {% if is_granted("ROLE_USER") %}
          {% include 'default/home.html.twig' %} 
+    {% endif %}
         {% block body %}
            
         {% endblock %}
