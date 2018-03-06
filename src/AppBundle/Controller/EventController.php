@@ -6,53 +6,93 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Entity\Event;
-
 /**
- * @Route("/{_locale}/Event")
+ * @Route("/{_locale}/event")
  */
 
 class EventController extends Controller
 {
-    /**
-     * @Route("/", name="listEvent")
-     */
-    public function listAction(Request $request)
-    {
-        //recuperer tout les evenement et les afficher 
-        // replace this example code with whatever you need
 
-        return $this->render('default/index.html.twig', [
-            'base_dir' => realpath($this->getParameter('kernel.project_dir')) . DIRECTORY_SEPARATOR,
-        ]);
+    /**
+     * @Route("/", name="Event_index")
+     * @return \Symfony\Component\HttpFundation\Response
+     * @throws \LogicException
+     */
+    public function indexAction(Request $request)
+    {
+        $repository = $this->getDoctrine()->getRepository(Event::class);
+        $events = $repository->findAll();
+        dump($events);
+        return $this->render('event/index.html.twig', ['events'=>$events]);
     }
 
-     /**
-     * @Route("/new", name="addEvent")
+    /**
+     * @Route("/add/{id}", name="addEvent")
+     * @return \Symfony\Component\HttpFundation\Response
+     * @throws \LogicException
      */
-
-//exemple a modifier et adapater
-    public function newAction()
+    public function newAction(User $user, Request $request)
     {
         $event = new Event();
-        $form = $this->createForm(
-            eventType::class,
-            $event,
-            [
-                'action' => $this->generateUrl('addevent', ['id' => $user->getId()])
-            ]
-        );
+        $form = $this->createForm(EventType::class, $event, [
+            'action' => $this->generateUrl('addEvent',['id'=>$user->getId()])]);
         $form->handleRequest($request);
-        if (!$form->isSubmitted() || !$form->isValid()) {
-            return $this->render('event/new. html. twig', [
+        if (!$form->isSubmitted() || !$form->isValid()){
+            return $this->render('event/new.html.twig', [
                 'add_event_form' => $form->createView(),
                 'user' => $user,
             ]);
         }
-        $event->setuser($user);
+        $event->setEvent($user);
         $em = $this->getDoctrine()->getManager();
         $em->persist($event);
         $em->flush();
-        $this->addFlash('notice', 'Youy create a new event !');
-        return $this->redirectToRoute('showUser', ['id' => $user->getId()]);
+
+        $this->addFlash('notice', 'Vous avez créé un évênement !');
+        return $this->redirectToRoute('Event_index');
+    }
+
+    /**
+     * @Route("/delete/{id}", requirements={"id": "\d+"}, name="deleteEvent")
+     */
+    public function deleteAction(Event $event,Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($event);
+        $em->flush();
+
+        return $this->redirectToRoute('Event_index');
+    }
+
+    /**
+     * @Route("/edit/{id}", requirements={"id":"\d+"}, name="editEvent")
+     */
+    public function updateAction(Event $event, Request $request)
+    {
+        $form = $this->createForm(EventType::class, $event);
+        $form->handleRequest($request);
+
+        if (!$form->isSubmitted() || !$form->isValid()){
+            return $this->render('event/edit.html.twig', [
+                'event' => $event,
+                'edit_event_form' => $form->createView(),
+            ]);
+        }
+
+        $em = $this->getDoctrine()->getManager();
+        $em->flush();
+        return $this->redirectToRoute('Event_index');
+    }
+
+    /**
+     * @Route("/show/{id}", requirements={"id":"\d+"}, name="showEvent")
+     */
+    public function showAction(Event $event,Request $request)
+    {
+        $repository = $this->getDoctrine()->getRepository(Event::class);
+        $event = $repository->find($event->getId());
+        dump($event);
+        return $this->render('event/show.html.twig', ['events'=>$event]);
     }
 }
+b
