@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User as FosUser;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * User
@@ -23,8 +24,10 @@ class User extends FosUser
     protected $id;
     public function __construct()
     {
-        parent::__construct();
         $this->events = new ArrayCollection();
+        $this->inscriptions = new ArrayCollection();
+        parent::__construct();
+       
     }
 
     /**
@@ -112,6 +115,14 @@ class User extends FosUser
         return $this->events;
     }
 
+     /**
+     * @return Collection|Event[]
+     */
+    public function addEvents($event){
+        $this->events[]=$event;
+        return $this->events;
+    }
+
     /**
      * @ORM\OneToMany(targetEntity ="Inscription", mappedBy="user")
      */
@@ -120,6 +131,14 @@ class User extends FosUser
      * @return Collection|Inscriptions[]
      */
     public function getInscriptions(){
+        return $this->inscriptions;
+    }
+
+      /**
+     * @return Collection|Inscriptions[]
+     */
+    public function addInscriptions($inscription){
+        $this->inscriptions[]=$inscription;
         return $this->inscriptions;
     }
 }

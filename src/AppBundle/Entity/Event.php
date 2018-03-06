@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Event
@@ -20,6 +21,10 @@ class Event
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+
+    // public function __construct(){
+    //     $this->users =  new ArrayCollection();
+    // }
 
     /**
      * @var string
@@ -84,6 +89,7 @@ class Event
         return $this->inscriptions;
     }
 
+   
     /**
      * Get id
      *
