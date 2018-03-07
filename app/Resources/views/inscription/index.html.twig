@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>{{'inscription.list'|trans}}</h1>
+
+    <table class=" table">
+        <thead>
+            <tr>
+                {# <th>Id</th> #}
+                <th>Date</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for inscription in inscriptions %}
+                {# {% if inscirption.user == app.user.id %} #}
+                <tr>
+                    {# <td><a href="{{ path('inscription_show', { 'id': inscription.id }) }}">{{ inscription.id }}</a></td> #}
+                    <td>
+                        {% if inscription.date %}{{ inscription.date|date('d/m/Y H:i') }}
+                        {% endif %}
+                    </td>
+                    <td>
+                        <a class="btn btn-primary" href="{{ path('inscription_show', { 'id': inscription.id }) }}">{{'inscription.show'|trans}}</a>
+                        
+                          <form action="{{ path("inscription_delete" , { 'id':  inscription.id })}} " method="post">
+
+                            <input hidden="hidden" type="text" id="id_inscription" name="id" value="{{inscription.id}}"/>
+
+                            <input class="btn btn-danger " type="submit" value="{{'inscription.unsubscribe'|trans}}">
+
+                        </form>
+
+                    </td>
+
+                </tr>
+                {# {% endif %} #}
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

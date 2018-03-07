@@ -1,13 +1,57 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <ul class="list-group">
-        {% for event in events %}
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-                {{event.title}}
-                <span class="badge badge-primary badge-pill">{{event.nbPlace}}</span>
-            </li>
-        {% endfor %}
-    </ul>
+    <h1>{{'event.list'|trans}}</h1>
+    <div class="text-center">
+        <a class="btn btn-primary " href="{{ path('event_new') }}">{{'event.create'|trans}}</a>
 
+    </div>
+    <br>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                {# <th>Id</th> #}
+                <th>{{'event.title'|trans}}</th>
+                {# <th>Description</th> #}
+                <th>{{'event.nbplace'|trans}}</th>
+                <th>{{'event.date'|trans}}</th>
+                {# <th>Place</th> #}
+                <th>{{'event.action'|trans}}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for event in events %}
+          {#  affichage des evenements en cours #}
+                {% if date(event.date) > date(date_now) %}
+                    <tr>
+                        {# <td><a href="{{ path('event_show', { 'id': event.id }) }}">{{ event.id }}</a></td> #}
+                        <td>{{ event.title }}</td>
+                        {# <td>{{ event.description }}</td> #}
+                        <td>{{ event.nbPlace }}</td>
+                        <td>
+                            {% if event.date %}{{ event.date|date('d/m/Y') }}
+                            {% endif %}
+                        </td>
+                        {# <td>{{ event.place }}</td> #}
+                        <td>
+
+                            {# affichage de edit uniquement si c'est l'utilisateur qui a creer l'evenement #}
+
+                            <a class="btn btn-primary" href="{{ path('event_show', { 'id': event.id }) }}">{{'event.show'|trans}}</a>
+                            {% if event.user.id == app.user.id %}
+
+                                <a class="btn btn-warning " href="{{ path('event_edit', { 'id': event.id }) }}">{{'event.edit'|trans}}</a>
+
+                            {% endif %}
+
+                        </td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+        </tbody>
+    </table>
+    <div class="text-center">
+        <a class="btn btn-primary " href="{{ path('event_new') }}">{{'event.create'|trans}}</a>
+
+    </div>
 {% endblock %}

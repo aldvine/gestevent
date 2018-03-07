@@ -2,104 +2,143 @@
 
 namespace AppBundle\Controller;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Entity\Event;
-use AppBundle\Entity\User;
-use AppBundle\Form\EventType;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
 /**
- * @Route("/{_locale}/event")
+ * Event controller.
+ *
+ * @Route("{_locale}/event")
  */
-
 class EventController extends Controller
 {
-
     /**
-     * @Route("/", name="Event_index")
-     * @return \Symfony\Component\HttpFundation\Response
-     * @throws \LogicException
+     * Lists all event entities.
+     *
+     * @Route("/", name="event_index")
+     * @Method("GET")
      */
-    public function indexAction(Request $request)
+    public function indexAction()
     {
-        $repository = $this->getDoctrine()->getRepository(Event::class);
-        $events = $repository->findAll();
-        dump($events);
-        return $this->render('event/index.html.twig', ['events'=>$events]);
+
+        // on affiche uniquement ceux à venir dans le template maison récupère tout quand même (fait)
+        $em = $this->getDoctrine()->getManager();
+
+        $events = $em->getRepository('AppBundle:Event')->findAll();
+        
+        return $this->render('event/index.html.twig', array(
+            'events' => $events,
+            'date_now'=>  date('Y-m-d H:i:s')
+        ));
     }
 
     /**
-     * @Route("/add/{id}", name="addEvent")
-     * @return \Symfony\Component\HttpFundation\Response
-     * @throws \LogicException
+     * Creates a new event entity.
+     *
+     * @Route("/new", name="event_new")
+     * @Method({"GET", "POST"})
      */
-    public function newAction(User $user, Request $request)
+    public function newAction(Request $request)
     {
         $event = new Event();
-        echo $user->getId();
-        $form = $this->createForm(EventType::class, $event, [
-            'action' => $this->generateUrl('addEvent')]);
-        echo "2-";
+        $form = $this->createForm('AppBundle\Form\EventType', $event);
         $form->handleRequest($request);
-        echo "3-";
-        if (!$form->isSubmitted() || !$form->isValid()){
-            return $this->render('event/new.html.twig', [
-                'add_event_form' => $form->createView(),
-                'user' => $user,
-            ]);
-        }
-        $event->setEvent($user);
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($event);
-        $em->flush();
+       
+            
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
 
-        $this->addFlash('notice', 'Vous avez créé un évênement !');
-        return $this->redirectToRoute('Event_index');
-    }
+            // ----ajout de l'utilisateur actuel----
+            $event->setUser($this->getUser());
+            //-------
 
-    /**
-     * @Route("/delete/{id}", requirements={"id": "\d+"}, name="deleteEvent")
-     */
-    public function deleteAction(Event $event,Request $request)
-    {
-        $em = $this->getDoctrine()->getManager();
-        $em->remove($event);
-        $em->flush();
+            $em->persist($event);
+            $em->flush();
 
-        return $this->redirectToRoute('Event_index');
-    }
-
-    /**
-     * @Route("/edit/{id}", requirements={"id":"\d+"}, name="editEvent")
-     */
-    public function updateAction(Event $event, Request $request)
-    {
-        echo 'test';
-        $form = $this->createForm(EventType::class, $event);
-        echo '   1-';
-        $form->handleRequest($request);
-        echo '   2-';
-        if (!$form->isSubmitted() || !$form->isValid()){
-            echo '   3-';
-            return $this->render('event/edit.html.twig', [
-                'event' => $event,
-                'edit_event_form' => $form->createView(),
-            ]);
-            echo '   4-';
+            return $this->redirectToRoute('event_show', array('id' => $event->getId()));
         }
 
-        $em = $this->getDoctrine()->getManager();
-        $em->flush();
-        return $this->redirectToRoute('Event_index');
+        return $this->render('event/new.html.twig', array(
+            'event' => $event,
+            'form' => $form->createView(),
+        ));
     }
 
     /**
-     * @Route("/show/{id}", requirements={"id":"\d+"}, name="showEvent")
+     * Finds and displays a event entity.
+     *
+     * @Route("/{id}", name="event_show")
+     * @Method("GET")
      */
-    public function showAction(Event $event,Request $request)
+    public function showAction(Event $event)
     {
-        $repository = $this->getDoctrine()->getRepository(Event::class);
-        $event = $repository->find($event->getId());
-        return $this->render('event/show.html.twig', ['event'=>$event]);
+        $deleteForm = $this->createDeleteForm($event);
+
+        return $this->render('event/show.html.twig', array(
+            'event' => $event,
+            'delete_form' => $deleteForm->createView(),
+        ));
+    }
+
+    /**
+     * Displays a form to edit an existing event entity.
+     *
+     * @Route("/{id}/edit", name="event_edit")
+     * @Method({"GET", "POST"})
+     */
+    public function editAction(Request $request, Event $event)
+    {
+        $deleteForm = $this->createDeleteForm($event);
+        $editForm = $this->createForm('AppBundle\Form\EventType', $event);
+        $editForm->handleRequest($request);
+
+        if ($editForm->isSubmitted() && $editForm->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+
+            return $this->redirectToRoute('event_edit', array('id' => $event->getId()));
+        }
+
+        return $this->render('event/edit.html.twig', array(
+            'event' => $event,
+            'edit_form' => $editForm->createView(),
+            'delete_form' => $deleteForm->createView(),
+        ));
+    }
+
+    /**
+     * Deletes a event entity.
+     *
+     * @Route("/{id}", name="event_delete")
+     * @Method("DELETE")
+     */
+    public function deleteAction(Request $request, Event $event)
+    {
+        $form = $this->createDeleteForm($event);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($event);
+            $em->flush();
+        }
+
+        return $this->redirectToRoute('event_index');
+    }
+
+    /**
+     * Creates a form to delete a event entity.
+     *
+     * @param Event $event The event entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
+    private function createDeleteForm(Event $event)
+    {
+        return $this->createFormBuilder()
+            ->setAction($this->generateUrl('event_delete', array('id' => $event->getId())))
+            ->setMethod('DELETE')
+            ->getForm()
+        ;
     }
 }

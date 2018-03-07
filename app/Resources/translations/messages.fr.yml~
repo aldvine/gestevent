@@ -21,5 +21,5 @@ inscription.list: 'Liste des inscriptions'
 inscription.show: Plus
 inscription: Inscription
 inscription.backtolist: 'Retour à la liste'
-inscription.unsubscribe: 'se désinscrire'
-
+inscription.unsubscribe: __inscription.unsubscribe
+inscription.delete: ''

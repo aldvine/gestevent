@@ -13,7 +13,7 @@ class InscriptionType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('date')->add('user')->add('event');
+        // $builder->add('date')->add('user')->add('event');
     }/**
      * {@inheritdoc}
      */

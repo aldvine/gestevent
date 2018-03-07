@@ -26,6 +26,11 @@ class Event
     //     $this->users =  new ArrayCollection();
     // }
 
+    public function __construct()
+    {
+        $this->inscriptions= new ArrayCollection();
+    }
+
     /**
      * @var string
      *
@@ -73,7 +78,7 @@ class Event
         return $this->user;
     }
 
-    public function setUser(){
+    public function setUser($user){
         $this->user = $user;
         return $this;
     }

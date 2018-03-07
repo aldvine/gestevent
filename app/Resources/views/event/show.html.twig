@@ -1,12 +1,67 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <ul class="list-group">
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-                {{event.title}}
-                <span class="badge badge-primary badge-pill">{{event.description}}</span>
-                <span class="badge badge-primary badge-pill">{{event.nbPlace}}</span>
-            </li>
-    </ul>
+    <div class=" container">
 
+        <h1>Event</h1>
+
+        <table class="table ">
+            <tbody>
+                {# <tr>
+                <th>Id</th>
+                <td>{{ event.id }}</td>
+            </tr> #}
+                <tr>
+                    <th>{{'event.title'|trans}}</th>
+                    <td>{{ event.title }}</td>
+                </tr>
+                <tr>
+                    <th>{{'event.description'|trans}}</th>
+                    <td>{{ event.description }}</td>
+                </tr>
+                <tr>
+                    <th>{{'event.nbplace'|trans}}</th>
+                    <td>{{ event.nbPlace }}</td>
+                </tr>
+                <tr>
+                    <th>{{'event.date'|trans}}</th>
+                    <td>
+                        {% if event.date %}{{ event.date|date('d/m/Y H:i') }}
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <th>{{'event.place'|trans}}</th>
+                    <td>{{ event.place }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        {# <a class="btn btn-primary btn-block" href="{{ path('event_index') }}">Back to the list</a> #}
+
+        {# affichage de edit et delete uniquement si c'est l'utilisateur qui a creer l'evenement #}
+
+        {% if event.user.id == app.user.id %}
+            <div class="text-center">
+                <a class="btn btn-warning col-sm-4 " href="{{ path('event_edit', { 'id': event.id }) }}">{{'event.edit'|trans}}</a>
+
+                {{ form_start(delete_form) }}
+                <input class="btn btn-danger col-sm-4" type="submit" value="{{'event.delete'|trans}}">
+                {{ form_end(delete_form) }}
+
+            {% else %}
+
+                <form action="{{ path("inscription_new" , { 'id': event.id })}} " method="post">
+
+                    <input hidden="hidden" type="checkbox" id="id_event" name="id" value="{{event.id}}"/>
+
+                    <input class="btn btn-success col-sm-4" type="submit" value="{{'event.participation'|trans}}">
+
+                </form>
+
+            {% endif %}
+
+            <a class="btn btn-primary  col-sm-4" href="{{ path('event_index') }}">{{'event.backtolist'|trans}}</a>
+        </div>
+    </div>
 {% endblock %}
