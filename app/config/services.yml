@@ -29,6 +29,11 @@ services:
         public: true
         tags: ['controller.service_arguments']
 
+    AppBundle\EventSubscriber\LocaleSubscriber:
+        arguments: ['%kernel.default_locale%']
+        # redundant if you're using autoconfigure
+        tags: [kernel.event_subscriber]
+        
     # add more services, or override services that need manual wiring
     # AppBundle\Service\ExampleService:
     #     arguments:

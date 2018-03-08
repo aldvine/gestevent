@@ -37,31 +37,13 @@
             </tbody>
         </table>
 
-        <h2>Liste inscrit</h2>
-
-        <table class="table ">
-            <tbody>
-            <tr>
-                <th>nom</th>
-                <th>prenom</th>
-            </tr>
-            {% for val in users %}
-                {% for user in val %}
-                    <tr>
-                        <td>{{ user.lastname }}</td>
-                        <td>{{ user.firstname }}</td>
-                    </tr>
-                {% endfor %}
-            {% endfor %}
-            </tbody>
-        </table>
+       
 
         {# <a class="btn btn-primary btn-block" href="{{ path('event_index') }}">Back to the list</a> #}
 
         {# affichage de edit et delete uniquement si c'est l'utilisateur qui a creer l'evenement #}
-
+   <div class="text-center">
         {% if event.user.id == app.user.id %}
-            <div class="text-center">
                 <a class="btn btn-warning col-sm-4 " href="{{ path('event_edit', { 'id': event.id }) }}">{{'event.edit'|trans}}</a>
 
                 {{ form_start(delete_form) }}
@@ -82,5 +64,24 @@
 
             <a class="btn btn-primary  col-sm-4" href="{{ path('event_index') }}">{{'event.backtolist'|trans}}</a>
         </div>
+
+         <h2>Liste inscrit</h2>
+
+        <table class="table ">
+            <tbody>
+            <tr>
+                <th>nom</th>
+                <th>prenom</th>
+            </tr>
+            {% for val in users %}
+                {% for user in val %}
+                    <tr>
+                        <td>{{ user.lastname }}</td>
+                        <td>{{ user.firstname }}</td>
+                    </tr>
+                {% endfor %}
+            {% endfor %}
+            </tbody>
+        </table>
     </div>
 {% endblock %}

@@ -33,14 +33,14 @@ class User extends FosUser
     /**
      * @var string
      *
-     * @ORM\Column(name="lastname", type="string", length=255, nullable=true)
+     * @ORM\Column(name="lastname", type="string", length=255, nullable=false)
      */
     private $lastname;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="firstname", type="string", length=255, nullable=true)
+     * @ORM\Column(name="firstname", type="string", length=255, nullable=false)
      */
     private $firstname;
 

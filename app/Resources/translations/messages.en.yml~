@@ -21,5 +21,11 @@ inscription.list: 'Inscriptions list'
 inscription.show: Show
 inscription: Inscription
 inscription.backtolist: 'Back to the list'
-inscription.unsubscribe: 'unsubscribe'
-
+inscription.unsubscribe: unsubscribe
+myprofile: 'My Profile'
+welcome: Welcome
+inscriptions: 'Inscriptions'
+event.editing: 'Event Edit'
+event.creation: 'Event Create'
+inscription.creation: 'Inscription Create'
+inscription.create: 'Create'

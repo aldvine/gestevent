@@ -43,9 +43,10 @@ class Inscription
         return $this;
     }
 
+    // les inscriptions sont supprimés si l'evenement est supprimé
      /**
      * @ORM\ManyToOne(targetEntity="Event", inversedBy="inscriptions")
-     * @ORM\JoinColumn(nullable=true)
+     * @ORM\JoinColumn(nullable=false,onDelete="CASCADE")
      */
     private $event;
     

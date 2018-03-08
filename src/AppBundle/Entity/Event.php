@@ -84,7 +84,8 @@ class Event
     }
 
     /**
-     * @ORM\OneToMany(targetEntity ="Inscription", mappedBy="event")
+     * @ORM\OneToMany(targetEntity ="Inscription", mappedBy="event" )
+     * 
      */
     private $inscriptions;
     /**
