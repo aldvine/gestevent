@@ -35,7 +35,7 @@ class InscriptionController extends Controller
             $id = $inscription->getId();
             $events["$id"] = $event;
         }
-        
+
         return $this->render('inscription/index.html.twig', array(
             'inscriptions' => $inscriptions,
             'events' => $events,

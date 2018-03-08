@@ -16,7 +16,7 @@ class EventRepository extends \Doctrine\ORM\EntityRepository
      * @param $date
      * @return Event[]
      */
-    public function findAllGreaterThanDate($date) : array
+    public function findAllGreaterThanDate($date)
     {
         // automatically knows to select Products
         // the "p" is an alias you'll use in the rest of the query
