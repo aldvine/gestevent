@@ -29,5 +29,6 @@ event.editing: 'Editer évènement'
 event.creation: 'Creation évènement'
 inscription.creation: 'Creation inscriptions'
 inscription.create: Créer
-register: "S'inscrire"
-language: 'Langue'
+register: 'S''inscrire'
+language: Langue
+theme: Theme

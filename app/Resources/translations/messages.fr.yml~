@@ -1,5 +1,5 @@
-home: accueil
-events: évenements
+home: Accueil
+events: Evènements
 test: 'ceci est un test'
 edit.event: 'éditer évènement'
 myinscriptions: 'mes inscriptions'
@@ -21,11 +21,13 @@ inscription.list: 'Liste des inscriptions'
 inscription.show: Plus
 inscription: Inscription
 inscription.backtolist: 'Retour à la liste'
-inscription.unsubscribe: 'se désinscrire'
+inscription.unsubscribe: 'Se désinscrire'
 myprofile: 'Mon Profil'
-welcome: 'Bienvenue'
-inscriptions: 'Inscriptions'
+welcome: Bienvenue
+inscriptions: Inscriptions
 event.editing: 'Editer évènement'
 event.creation: 'Creation évènement'
 inscription.creation: 'Creation inscriptions'
-inscription.create: 'Créer'
+inscription.create: Créer
+register: "S'inscrire"
+language: 'Langue'
