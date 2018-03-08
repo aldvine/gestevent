@@ -7,7 +7,9 @@ use AppBundle\Entity\Inscription;
 use AppBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
+use Doctrine\Common\Collections\ArrayCollection;
 /**
  * Event controller.
  *
@@ -79,6 +81,7 @@ class EventController extends Controller
 
         $em = $this->getDoctrine()->getManager();
         $inscriptions = $em->getRepository('AppBundle:Inscription')->findBy(array('event' => $event->getId()));
+        $users = new ArrayCollection();
         foreach($inscriptions as $inscription){
             $user = $em->getRepository('AppBundle:User')->findBy(array('id' => $inscription->getId()));
             $users[] = $user;
@@ -87,7 +90,7 @@ class EventController extends Controller
         return $this->render('event/show.html.twig', array(
             'users' => $users,
             'event' => $event,
-            'delete_form' => $dealeteForm->createView(),
+            'delete_form' => $deleteForm->createView(),
         ));
     }
 
