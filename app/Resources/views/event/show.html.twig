@@ -7,33 +7,52 @@
 
         <table class="table ">
             <tbody>
-                {# <tr>
-                <th>Id</th>
-                <td>{{ event.id }}</td>
-            </tr> #}
-                <tr>
-                    <th>{{'event.title'|trans}}</th>
-                    <td>{{ event.title }}</td>
-                </tr>
-                <tr>
-                    <th>{{'event.description'|trans}}</th>
-                    <td>{{ event.description }}</td>
-                </tr>
-                <tr>
-                    <th>{{'event.nbplace'|trans}}</th>
-                    <td>{{ event.nbPlace }}</td>
-                </tr>
-                <tr>
-                    <th>{{'event.date'|trans}}</th>
-                    <td>
-                        {% if event.date %}{{ event.date|date('d/m/Y H:i') }}
-                        {% endif %}
-                    </td>
-                </tr>
-                <tr>
-                    <th>{{'event.place'|trans}}</th>
-                    <td>{{ event.place }}</td>
-                </tr>
+            {# <tr>
+            <th>Id</th>
+            <td>{{ event.id }}</td>
+        </tr> #}
+            <tr>
+                <th>{{'event.title'|trans}}</th>
+                <td>{{ event.title }}</td>
+            </tr>
+            <tr>
+                <th>{{'event.description'|trans}}</th>
+                <td>{{ event.description }}</td>
+            </tr>
+            <tr>
+                <th>{{'event.nbplace'|trans}}</th>
+                <td>{{ event.nbPlace }}</td>
+            </tr>
+            <tr>
+                <th>{{'event.date'|trans}}</th>
+                <td>
+                    {% if event.date %}{{ event.date|date('d/m/Y H:i') }}
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <th>{{'event.place'|trans}}</th>
+                <td>{{ event.place }}</td>
+            </tr>
+            </tbody>
+        </table>
+
+        <h2>Liste inscrit</h2>
+
+        <table class="table ">
+            <tbody>
+            <tr>
+                <th>nom</th>
+                <th>prenom</th>
+            </tr>
+            {% for val in users %}
+                {% for user in val %}
+                    <tr>
+                        <td>{{ user.lastname }}</td>
+                        <td>{{ user.firstname }}</td>
+                    </tr>
+                {% endfor %}
+            {% endfor %}
             </tbody>
         </table>
 
