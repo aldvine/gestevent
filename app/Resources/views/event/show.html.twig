@@ -73,13 +73,11 @@
                 <th>nom</th>
                 <th>prenom</th>
             </tr>
-            {% for val in users %}
-                {% for user in val %}
+            {% for user in users %}
                     <tr>
                         <td>{{ user.lastname }}</td>
                         <td>{{ user.firstname }}</td>
                     </tr>
-                {% endfor %}
             {% endfor %}
             </tbody>
         </table>

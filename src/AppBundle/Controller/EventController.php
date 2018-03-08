@@ -83,7 +83,7 @@ class EventController extends Controller
         $inscriptions = $em->getRepository('AppBundle:Inscription')->findBy(array('event' => $event->getId()));
         $users = new ArrayCollection();
         foreach($inscriptions as $inscription){
-            $user = $em->getRepository('AppBundle:User')->findBy(array('id' => $inscription->getId()));
+            $user = $em->getRepository('AppBundle:User')->findOneBy(array('id' => $inscription->getUser()->getId()));
             $users[] = $user;
         }
 

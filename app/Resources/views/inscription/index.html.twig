@@ -7,25 +7,28 @@
         <thead>
             <tr>
                 {# <th>Id</th> #}
-                <th>Date</th>
+                <th>titre</th>
+                <th>date</th>
                 <th>Action</th>
             </tr>
         </thead>
         <tbody>
-            {% for inscription in inscriptions %}
-                {# {% if inscirption.user == app.user.id %} #}
+            {% for key,event in events %}
                 <tr>
-                    {# <td><a href="{{ path('inscription_show', { 'id': inscription.id }) }}">{{ inscription.id }}</a></td> #}
                     <td>
-                        {% if inscription.date %}{{ inscription.date|date('d/m/Y H:i') }}
+                        {% if event.title %}{{ event.title }}
                         {% endif %}
                     </td>
                     <td>
-                        <a class="btn btn-primary" href="{{ path('inscription_show', { 'id': inscription.id }) }}">{{'inscription.show'|trans}}</a>
+                        {% if event.date %}{{ event.date|date('d/m/Y H:i') }}
+                        {% endif %}
+                    </td>
+                    <td>
+                        <a class="btn btn-primary" href="{{ path('inscription_show', { 'id': key }) }}">{{'inscription.show'|trans}}</a>
                         
-                          <form action="{{ path("inscription_delete" , { 'id':  inscription.id })}} " method="post">
+                          <form action="{{ path("inscription_delete" , { 'id':  key })}} " method="post">
 
-                            <input hidden="hidden" type="text" id="id_inscription" name="id" value="{{inscription.id}}"/>
+                            <input hidden="hidden" type="text" id="id_inscription" name="id" value="{{key}}"/>
 
                             <input class="btn btn-danger " type="submit" value="{{'inscription.unsubscribe'|trans}}">
 
@@ -34,7 +37,6 @@
                     </td>
 
                 </tr>
-                {# {% endif %} #}
             {% endfor %}
         </tbody>
     </table>
