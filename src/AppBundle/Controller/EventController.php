@@ -3,6 +3,8 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Event;
+use AppBundle\Entity\Inscription;
+use AppBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;use Symfony\Component\HttpFoundation\Request;
@@ -75,9 +77,17 @@ class EventController extends Controller
     {
         $deleteForm = $this->createDeleteForm($event);
 
+        $em = $this->getDoctrine()->getManager();
+        $inscriptions = $em->getRepository('AppBundle:Inscription')->findBy(array('event' => $event->getId()));
+        foreach($inscriptions as $inscription){
+            $user = $em->getRepository('AppBundle:User')->findBy(array('id' => $inscription->getId()));
+            $users[] = $user;
+        }
+
         return $this->render('event/show.html.twig', array(
+            'users' => $users,
             'event' => $event,
-            'delete_form' => $deleteForm->createView(),
+            'delete_form' => $dealeteForm->createView(),
         ));
     }
 
