@@ -1,10 +1,10 @@
 home: accueil
 events: évenements
 test: 'ceci est un test'
-edit.event: 'éditer évenement'
+edit.event: 'éditer évènement'
 myinscriptions: 'mes inscriptions'
 logout: Déconnexion
-event.list: 'Liste des évenements'
+event.list: 'Liste des évènements'
 event.create: Créer
 event.title: Titre
 event.nbplace: 'Nb place'
@@ -22,4 +22,10 @@ inscription.show: Plus
 inscription: Inscription
 inscription.backtolist: 'Retour à la liste'
 inscription.unsubscribe: 'se désinscrire'
-
+myprofile: 'Mon Profil'
+welcome: 'Bienvenue'
+inscriptions: 'Inscriptions'
+event.editing: 'Editer évènement'
+event.creation: 'Creation évènement'
+inscription.creation: 'Creation inscriptions'
+inscription.create: 'Créer'

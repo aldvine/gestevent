@@ -5,6 +5,7 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
+         {% if is_granted("ROLE_USER") %}
             <li class="nav-item ">
                 <a class="nav-link" href="{{ path('homepage') }}">{{'home'|trans}}
                 </a>
@@ -18,14 +19,27 @@
             <li class="nav-item">
                 <a class="nav-link" href="{{ path('fos_user_profile_show') }}">{{'myprofile'|trans}}</a>
             </li>
-            
+
             <li class="nav-item">
                 <a class="nav-link" href="{{ path('fos_user_security_logout') }}">{{'logout'|trans}}</a>
             </li>
-            <li class="nav-item">
-
+         {% else %}
+             <li class="nav-item">
+                <a class="nav-link" href="{{ path('fos_user_registration_register') }}">{{'register'|trans}}</a>
             </li>
+         {% endif %}
+           
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {{'language'|trans}}
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{{ path('setlocale',{'locale':'fr'}) }}">FR</a>
+                    <a class="dropdown-item" href="{{ path('setlocale',{'locale':'en'}) }}">EN</a>
 
+                </div>
+            </li>
+        
         </ul>
     </div>
 </nav>
