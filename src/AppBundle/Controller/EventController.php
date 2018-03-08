@@ -25,15 +25,19 @@ class EventController extends Controller
      */
     public function indexAction()
     {
+        // recuperation de tout les evenement
+        // $em = $this->getDoctrine()->getManager();
+        // $events = $em->getRepository('AppBundle:Event')->findAll();
 
-        // on affiche uniquement ceux à venir dans le template maison récupère tout quand même (fait)
-        $em = $this->getDoctrine()->getManager();
+        // recuperation d'uniquement ceux à venir
+        $events = $this->getDoctrine()
+            ->getRepository('AppBundle:Event')
+            ->findAllGreaterThanDate(date('Y-m-d H:i:s'));
 
-        $events = $em->getRepository('AppBundle:Event')->findAll();
-        
+        // dump($events);
         return $this->render('event/index.html.twig', array(
             'events' => $events,
-            'date_now'=>  date('Y-m-d H:i:s')
+            'date_now' => date('Y-m-d H:i:s')
         ));
     }
 
@@ -48,8 +52,8 @@ class EventController extends Controller
         $event = new Event();
         $form = $this->createForm('AppBundle\Form\EventType', $event);
         $form->handleRequest($request);
-       
-            
+
+
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
 
@@ -81,9 +85,12 @@ class EventController extends Controller
 
         $em = $this->getDoctrine()->getManager();
         $inscriptions = $em->getRepository('AppBundle:Inscription')->findBy(array('event' => $event->getId()));
+
         $users = new ArrayCollection();
-        foreach($inscriptions as $inscription){
-            $user = $em->getRepository('AppBundle:User')->findBy(array('id' => $inscription->getId()));
+        foreach ($inscriptions as $inscription) {
+
+            $user = $em->getRepository('AppBundle:User')->findBy(array('id' => $inscription->getUser()->getId()));
+
             $users[] = $user;
         }
 
@@ -151,7 +158,6 @@ class EventController extends Controller
         return $this->createFormBuilder()
             ->setAction($this->generateUrl('event_delete', array('id' => $event->getId())))
             ->setMethod('DELETE')
-            ->getForm()
-        ;
+            ->getForm();
     }
 }

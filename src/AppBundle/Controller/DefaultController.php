@@ -55,7 +55,9 @@ class DefaultController extends Controller
             // dump($request->getSession());
         }
 
-        return $this->redirectToRoute('homepage');
+        $referer = $request->headers->get('referer');
+
+        return $this->redirect($referer);
        
     }
 
