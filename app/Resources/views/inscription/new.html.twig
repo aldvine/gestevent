@@ -1,16 +1,16 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Inscription creation</h1>
+    <h1>{{'inscription.creation'|trans}}</h1>
+
+        {% form_theme form 'bootstrap_4_layout.html.twig' %}
 
     {{ form_start(form) }}
         {{ form_widget(form) }}
-        <input type="submit" value="Create" />
+        <input class="btn btn-success" type="submit" value="{{'inscription.create'|trans}}" />
     {{ form_end(form) }}
 
-    <ul>
-        <li>
-            <a href="{{ path('inscription_index') }}">Back to the list</a>
-        </li>
-    </ul>
+    
+            <a class="btn btn-primary" href="{{ path('inscription_index') }}">{{'inscription.backtolist'|trans}}</a>
+    
 {% endblock %}

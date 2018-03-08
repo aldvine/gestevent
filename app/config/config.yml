@@ -75,3 +75,4 @@ fos_user:
     from_email:
         address: "aldvine608@hotmail.fr"
         sender_name: "fosuser"
+    

@@ -1,14 +1,17 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <div class="card" style="width: 18rem;">
-  <img class="card-img-top" src="..." alt="Card image cap">
-  <div class="card-body">
-    <h5 class="card-title">Card title</h5>
-    <p class="card-text">{{'test'|trans}}</p>
-    <a href="{{ path('homepage') }}" class="btn btn-primary">Go somewhere</a>
-  </div>
-</div>
+   <div class="row">
+    <div class="mx-auto">
+      <h1> {{'welcome'|trans}}</h1>
+      <div class="text-center  ">
+        <a class="btn btn-primary btn-lg" href="{{ path('event_index') }}">{{'events'|trans}}</a>
+      </div>
+      <div class="text-center  mx-auto">
+        <a class="btn btn-warning btn-lg  " href="{{ path('inscription_index') }}">{{'inscriptions'|trans}}</a>
+      </div>
+    </div>
+   </div>
             
 {% endblock %}
 
