@@ -28,6 +28,7 @@
         </tbody>
     </table>
 
+    <div class="text-center">
     <a class="btn btn-primary" href="{{ path('inscription_index') }}">{{'inscription.backtolist'|trans}}</a>
 
     <form action="{{ path("inscription_delete" , { 'id':  id })}} " method="post">
@@ -37,7 +38,8 @@
         <input class="btn btn-danger " type="submit" value="{{'inscription.unsubscribe'|trans}}">
 
     </form>
-
+    </div>
+        
     <h2>Liste inscrit</h2>
 
     <table class="table ">
