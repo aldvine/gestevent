@@ -3,30 +3,57 @@
 {% block body %}
     <h1>{{'inscription'|trans}}</h1>
 
-    <table class="table">
+    <table class="table ">
         <tbody>
-            {# <tr>
-                <th>Id</th>
-                <td>{{ inscription.id }}</td>
-            </tr> #}
-            <tr>
-                <th>Date</th>
-                <td>
-                    {% if inscription.date %}{{ inscription.date|date('d/m/Y H:i') }}
-                    {% endif %}
-                </td>
-            </tr>
+        <tr>
+            <th>{{'event.title'|trans}}</th>
+            <td>{{ event.title }}</td>
+        </tr>
+        <tr>
+            <th>{{'event.description'|trans}}</th>
+            <td>{{ event.description }}</td>
+        </tr>
+        <tr>
+            <th>{{'event.date'|trans}}</th>
+            <td>
+                {% if event.date %}{{ event.date|date('d/m/Y H:i') }}
+                {% endif %}
+            </td>
+        </tr>
+        <tr>
+            <th>{{'event.place'|trans}}</th>
+            <td>{{ event.place }}</td>
+        </tr>
         </tbody>
     </table>
 
     <a class="btn btn-primary" href="{{ path('inscription_index') }}">{{'inscription.backtolist'|trans}}</a>
 
-    <form action="{{ path("inscription_delete" , { 'id':  inscription.id })}} " method="post">
+    <form action="{{ path("inscription_delete" , { 'id':  id })}} " method="post">
 
-        <input hidden="hidden" type="text" id="id_inscription" name="id" value="{{inscription.id}}"/>
+        <input hidden="hidden" type="text" id="id_inscription" name="id" value="{{id}}"/>
 
         <input class="btn btn-danger " type="submit" value="{{'inscription.unsubscribe'|trans}}">
 
     </form>
+
+    <h2>Liste inscrit</h2>
+
+    <table class="table ">
+        <tbody>
+        <tr>
+            <th>nom</th>
+            <th>prenom</th>
+        </tr>
+        {% for val in users %}
+            {% for user in val %}
+                <tr>
+                    <td>{{ user.lastname }}</td>
+                    <td>{{ user.firstname }}</td>
+                </tr>
+            {% endfor %}
+        {% endfor %}
+        </tbody>
+    </table>
 
 {% endblock %}

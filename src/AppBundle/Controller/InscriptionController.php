@@ -3,10 +3,12 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Inscription;
+use AppBundle\Entity\Event;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Inscription controller.
@@ -27,9 +29,16 @@ class InscriptionController extends Controller
         $em = $this->getDoctrine()->getManager();
         // liste uniquement de ses inscriptions
         $inscriptions = $em->getRepository('AppBundle:Inscription')->findBy(array('user' => $this->getUser()));
-
+        $events = new ArrayCollection();
+        foreach($inscriptions as $inscription){
+            $event = $em->getRepository('AppBundle:Event')->findOneBy(array('id' => $inscription->getEvent()->getId()));
+            $id = $inscription->getId();
+            $events["$id"] = $event;
+        }
+        
         return $this->render('inscription/index.html.twig', array(
             'inscriptions' => $inscriptions,
+            'events' => $events,
         ));
     }
 
@@ -69,8 +78,19 @@ class InscriptionController extends Controller
     {
         $deleteForm = $this->createDeleteForm($inscription);
 
+        $em = $this->getDoctrine()->getManager();
+        $event = $em->getRepository('AppBundle:Event')->findOneBy(array('id' => $inscription->getEvent()->getId()));
+        $inscriptions = $em->getRepository('AppBundle:Inscription')->findBy(array('event' => $event->getId()));
+        $users = new ArrayCollection();
+        foreach($inscriptions as $inscription){
+            $user = $em->getRepository('AppBundle:User')->findBy(array('id' => $inscription->getUser()->getId()));
+            $users[] = $user;
+        }
+
         return $this->render('inscription/show.html.twig', array(
-            'inscription' => $inscription,
+            'users' => $users,
+            'event' => $event,
+            'id' => $inscription->getId(),
             'delete_form' => $deleteForm->createView(),
         ));
     }
