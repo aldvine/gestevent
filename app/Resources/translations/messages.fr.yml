@@ -11,8 +11,10 @@ event.list: 'Liste des évènements'
 event.tri: 'Recherche avancée'
 event.byplace: 'Par lieu'
 event.bydate: 'Par date'
+event.bytheme: 'Par thème'
 event.create: Créer
 event.title: Titre
+event.theme: Thème
 event.nbplace: 'Nb place'
 event.date: Date
 event.action: Action

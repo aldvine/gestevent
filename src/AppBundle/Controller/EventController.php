@@ -141,6 +141,23 @@ class EventController extends Controller
     }
 
     /**
+     * Finds and displays a event entity.
+     *
+     * @Route("/Bytheme", name="event_showByTheme")
+     * @Method("POST")
+     */
+    public function showByThemeAction(Request $request)
+    {
+        $theme = $request->request->get('theme');
+        $em = $this->getDoctrine()->getManager();
+        $events = $em->getRepository('AppBundle:Event')->findBy(array('theme' => $theme));
+
+        return $this->render('event/index.html.twig', array(
+            'events' => $events,
+        ));
+    }
+
+    /**
      * Displays a form to edit an existing event entity.
      *
      * @Route("/{id}/edit", name="event_edit")

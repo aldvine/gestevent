@@ -65,7 +65,13 @@ class Event
      * @ORM\Column(name="place", type="string", length=500, nullable=true)
      */
     private $place;
-  
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="theme", type="string", length=500, nullable=true)
+     */
+    private $theme;
 
 
     /**
@@ -224,6 +230,30 @@ class Event
     public function getPlace()
     {
         return $this->place;
+    }
+
+    /**
+     * Set theme
+     *
+     * @param string $theme
+     *
+     * @return Event
+     */
+    public function setTheme($theme)
+    {
+        $this->theme = $theme;
+
+        return $this;
+    }
+
+    /**
+     * Get theme
+     *
+     * @return string
+     */
+    public function getTheme()
+    {
+        return $this->theme;
     }
 }
 

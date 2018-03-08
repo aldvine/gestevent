@@ -22,6 +22,15 @@
             <input class="btn btn-info " type="submit" value="{{'event.bydate'|trans}}">
 
     </form>
+
+    <form action="{{ path("event_showByTheme" )}} " method="post">
+
+        <input type="text" id="theme" name="theme"/>
+
+        <input class="btn btn-info " type="submit" value="{{'event.bytheme'|trans}}">
+
+    </form>
+
     </div>
 
     <br>
@@ -32,6 +41,7 @@
                 <th>{{'event.title'|trans}}</th>
                 {# <th>Description</th> #}
                 <th>{{'event.nbplace'|trans}}</th>
+                <th>{{'event.theme'|trans}}</th>
                 <th>{{'event.date'|trans}}</th>
                 {# <th>Place</th> #}
                 <th>{{'event.action'|trans}}</th>
@@ -46,6 +56,7 @@
                         <td>{{ event.title }}</td>
                         {# <td>{{ event.description }}</td> #}
                         <td>{{ event.nbPlace }}</td>
+                        <td>{{ event.theme }}</td>
                         <td>
                             {% if event.date %}{{ event.date|date('d/m/Y') }}
                             {% endif %}
