@@ -7,6 +7,7 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Twig_' => array($vendorDir . '/twig/twig/lib'),
+    'Suin\\RSSWriter' => array($vendorDir . '/suin/php-rss-writer/src'),
     'SensioLabs\\Security' => array($vendorDir . '/sensiolabs/security-checker'),
     'Doctrine\\ORM\\' => array($vendorDir . '/doctrine/orm/lib'),
     'Doctrine\\DBAL\\' => array($vendorDir . '/doctrine/dbal/lib'),

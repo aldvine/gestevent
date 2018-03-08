@@ -23,7 +23,6 @@ class EventRepository extends \Doctrine\ORM\EntityRepository
         $qb = $this->createQueryBuilder('e')
             ->andWhere('e.date > :date')
             ->setParameter('date',$date )
-          
             ->getQuery();
 
         return $qb->execute();

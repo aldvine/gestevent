@@ -236,6 +236,10 @@ class ComposerStaticInitf53734dee774fff183aa0ed15326bbca
         ),
         'S' => 
         array (
+            'Suin\\RSSWriter' => 
+            array (
+                0 => __DIR__ . '/..' . '/suin/php-rss-writer/src',
+            ),
             'SensioLabs\\Security' => 
             array (
                 0 => __DIR__ . '/..' . '/sensiolabs/security-checker',
