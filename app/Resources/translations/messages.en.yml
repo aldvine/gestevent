@@ -29,5 +29,6 @@ event.editing: 'Event Edit'
 event.creation: 'Event Create'
 inscription.creation: 'Inscription Create'
 inscription.create: Create
-register: "Register"
-language: 'Language'
+register: Register
+language: Language
+theme: Theme

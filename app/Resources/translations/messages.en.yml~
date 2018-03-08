@@ -1,31 +1,33 @@
-home: home
-events: events
+home: Home
+events: Events
 test: 'this is a test'
-edit.event: 'edit event'
-myinscriptions: 'my inscriptions'
-logout: logout
-event.list: 'event list'
-event.create: 'create event'
-event.title: title
-event.nbplace: nbplace
-event.date: date
-event.action: action
-event.show: show
-event.edit: edit
-event.description: description
-event.place: place
-event.delete: delete
-event.backtolist: 'back to the list'
+edit.event: 'Edit event'
+myinscriptions: 'My inscriptions'
+logout: Logout
+event.list: 'Event list'
+event.create: 'Create event'
+event.title: Title
+event.nbplace: nbPlace
+event.date: Date
+event.action: Action
+event.show: Show
+event.edit: Edit
+event.description: Description
+event.place: Place
+event.delete: Delete
+event.backtolist: 'Back to the list'
 event.participation: Participate
 inscription.list: 'Inscriptions list'
 inscription.show: Show
 inscription: Inscription
 inscription.backtolist: 'Back to the list'
-inscription.unsubscribe: unsubscribe
+inscription.unsubscribe: Unsubscribe
 myprofile: 'My Profile'
 welcome: Welcome
-inscriptions: 'Inscriptions'
+inscriptions: Inscriptions
 event.editing: 'Event Edit'
 event.creation: 'Event Create'
 inscription.creation: 'Inscription Create'
-inscription.create: 'Create'
+inscription.create: Create
+register: "Register"
+language: 'Language'

@@ -16,7 +16,7 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
-
+       
         // replace this example code with whatever you need
         return $this->render('default/index.html.twig', [
             'base_dir' => realpath($this->getParameter('kernel.project_dir')) . DIRECTORY_SEPARATOR,
@@ -29,14 +29,34 @@ class DefaultController extends Controller
      * @Route("/locale/{locale}", name="setlocale")
      * 
      */
-    public function setLocaleAction(Request $request ,$locale = "null")
+    public function setLocaleAction(Request $request, $locale = "null")
     {
         if ($locale != null) {
            // On enregistre la langue en session
             $request->getSession()->set('_locale', $locale);
         }
-    
+
         return $this->redirectToRoute('homepage');
+    }
+    /**
+     * Change the locale for the current user
+     *
+     * @Route("/theme/{style}", name="setTheme")
+     * 
+     */
+    public function setThemeAction(Request $request, $style = "null")
+    {
+       
+        if ($style != null) {
+           // On enregistre la langue en session
+
+           
+            $request->getSession()->set('style', 'css/' . $style . '.css');
+            // dump($request->getSession());
+        }
+
+        return $this->redirectToRoute('homepage');
+       
     }
 
 }

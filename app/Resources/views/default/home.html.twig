@@ -39,6 +39,22 @@
 
                 </div>
             </li>
+             {% if is_granted("ROLE_USER") %}
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {{'theme'|trans}}
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{{ path('setTheme',{'style':'bootstrap'}) }}">bootstrap</a>
+                    <a class="dropdown-item" href="{{ path('setTheme',{'style':'lux'}) }}">lux</a>
+                    <a class="dropdown-item" href="{{ path('setTheme',{'style':'materia'}) }}">materia</a>
+                    <a class="dropdown-item" href="{{ path('setTheme',{'style':'cerulean'}) }}">cerulean</a>
+                    <a class="dropdown-item" href="{{ path('setTheme',{'style':'sketchy'}) }}">sketchy</a>
+                </div>
+            </li>
+
+            {% endif %}
+        
         
         </ul>
     </div>

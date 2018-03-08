@@ -9,7 +9,13 @@
 
         {% block stylesheets %}
             <!-- Latest compiled and minified CSS -->
-            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+           
+            {% if app.session.get('style') is empty %}
+                <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
+
+            {% else %}
+                <link rel="stylesheet" href="{{ asset(app.session.get('style')) }}"/>
+            {% endif %}
 
         {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
