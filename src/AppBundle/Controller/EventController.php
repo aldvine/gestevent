@@ -102,6 +102,45 @@ class EventController extends Controller
     }
 
     /**
+     * Finds and displays a event entity.
+     *
+     * @Route("/Byplace", name="event_showByPlace")
+     * @Method("POST")
+     */
+    public function showByPlaceAction(Request $request)
+    {
+        $place = $request->request->get('place');
+        $em = $this->getDoctrine()->getManager();
+        $events = $em->getRepository('AppBundle:Event')->findBy(array('place' => $place));
+
+        return $this->render('event/index.html.twig', array(
+            'events' => $events,
+        ));
+    }
+
+    /**
+     * Finds and displays a event entity.
+     *
+     * @Route("/Bydate", name="event_showByDate")
+     * @Method("POST")
+     */
+    public function showByDateAction(Request $request)
+    {
+        $date = $request->request->get('date');
+        $Events = $this->getDoctrine()->getRepository('AppBundle:Event')->findAllGreaterThanDate(date('Y-m-d H:i:s'));
+        $events = new ArrayCollection();
+        foreach($Events as $event){
+            $dateTime = date_format($event->getDate(),"Y-m-d");
+            if($date == $dateTime){
+                $events[] = $event;
+            }
+        }
+        return $this->render('event/index.html.twig', array(
+            'events' => $events,
+        ));
+    }
+
+    /**
      * Displays a form to edit an existing event entity.
      *
      * @Route("/{id}/edit", name="event_edit")

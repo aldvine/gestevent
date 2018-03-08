@@ -5,7 +5,25 @@
     <div class="text-center">
         <a class="btn btn-primary " href="{{ path('event_new') }}">{{'event.create'|trans}}</a>
 
+    <h3>{{'event.tri'|trans}}</h3>
+
+    <form action="{{ path("event_showByPlace" )}} " method="post">
+
+            <input type="text" id="place" name="place"/>
+
+            <input class="btn btn-info " type="submit" value="{{'event.byplace'|trans}}">
+
+        </form>
+
+    <form action="{{ path("event_showByDate" )}} " method="post">
+
+            <input type="date" id="date" name="date"/>
+
+            <input class="btn btn-info " type="submit" value="{{'event.bydate'|trans}}">
+
+    </form>
     </div>
+
     <br>
     <table class="table table-striped">
         <thead>

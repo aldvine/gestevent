@@ -4,7 +4,13 @@ test: 'ceci est un test'
 edit.event: 'éditer évènement'
 myinscriptions: 'mes inscriptions'
 logout: Déconnexion
+listparticipant: 'Liste des participants'
+user.lastname: 'Nom'
+user.firstname: 'Prénom'
 event.list: 'Liste des évènements'
+event.tri: 'Recherche avancée'
+event.byplace: 'Par lieu'
+event.bydate: 'Par date'
 event.create: Créer
 event.title: Titre
 event.nbplace: 'Nb place'

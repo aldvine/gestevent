@@ -65,13 +65,13 @@
             <a class="btn btn-primary  col-sm-4" href="{{ path('event_index') }}">{{'event.backtolist'|trans}}</a>
         </div>
 
-         <h2>Liste inscrit</h2>
+         <h2>{{'listparticipant'|trans}}</h2>
 
         <table class="table ">
             <tbody>
             <tr>
-                <th>nom</th>
-                <th>prenom</th>
+                <th>{{'user.lastname'|trans}}</th>
+                <th>{{'user.firstname'|trans}}</th>
             </tr>
             {% for user in users %}
                     <tr>
