@@ -50,7 +50,7 @@
         <tbody>
             {% for event in events %}
           {#  affichage des evenements en cours #}
-                {% if date(event.date) > date(date_now) %}
+                {# {% if date(event.date) > date(date_now) %} #}
                     <tr>
                         {# <td><a href="{{ path('event_show', { 'id': event.id }) }}">{{ event.id }}</a></td> #}
                         <td>{{ event.title }}</td>
@@ -75,7 +75,7 @@
 
                         </td>
                     </tr>
-                {% endif %}
+                {# {% endif %} #}
             {% endfor %}
         </tbody>
     </table>

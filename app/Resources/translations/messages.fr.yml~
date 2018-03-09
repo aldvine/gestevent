@@ -4,9 +4,17 @@ test: 'ceci est un test'
 edit.event: 'éditer évènement'
 myinscriptions: 'mes inscriptions'
 logout: Déconnexion
+listparticipant: 'Liste des participants'
+user.lastname: 'Nom'
+user.firstname: 'Prénom'
 event.list: 'Liste des évènements'
+event.tri: 'Recherche avancée'
+event.byplace: 'Par lieu'
+event.bydate: 'Par date'
+event.bytheme: 'Par thème'
 event.create: Créer
 event.title: Titre
+event.theme: Thème
 event.nbplace: 'Nb place'
 event.date: Date
 event.action: Action
@@ -29,5 +37,6 @@ event.editing: 'Editer évènement'
 event.creation: 'Creation évènement'
 inscription.creation: 'Creation inscriptions'
 inscription.create: Créer
-register: "S'inscrire"
-language: 'Langue'
+register: 'S''inscrire'
+language: Langue
+theme: Theme

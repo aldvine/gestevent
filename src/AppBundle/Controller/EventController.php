@@ -10,6 +10,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Console\Input\StringInput;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 /**
  * Event controller.
  *
@@ -37,7 +39,7 @@ class EventController extends Controller
         // dump($events);
         return $this->render('event/index.html.twig', array(
             'events' => $events,
-            'date_now' => date('Y-m-d H:i:s')
+            // 'date_now' => date('Y-m-d H:i:s')
         ));
     }
 
@@ -106,13 +108,26 @@ class EventController extends Controller
      *
      * @Route("/Byplace", name="event_showByPlace")
      * @Method("POST")
+     * 
      */
     public function showByPlaceAction(Request $request)
     {
-        $place = $request->request->get('place');
-        $em = $this->getDoctrine()->getManager();
-        $events = $em->getRepository('AppBundle:Event')->findBy(array('place' => $place));
 
+    
+          $place = $request->request->get('place');
+    
+        if (empty($place)) {
+            $this->redirect($this->generateUrl('event_index'));
+        } else {
+ // $em = $this->getDoctrine()->getManager();
+        // $events = $em->getRepository('AppBundle:Event')->findBy(array('place' => $place));
+
+         // recuperation d'uniquement ceux à venir
+            $events = $this->getDoctrine()
+                ->getRepository('AppBundle:Event')
+                ->findByPlace(date('Y-m-d H:i:s'), $place);
+        }
+        
         return $this->render('event/index.html.twig', array(
             'events' => $events,
         ));
@@ -129,9 +144,9 @@ class EventController extends Controller
         $date = $request->request->get('date');
         $Events = $this->getDoctrine()->getRepository('AppBundle:Event')->findAllGreaterThanDate(date('Y-m-d H:i:s'));
         $events = new ArrayCollection();
-        foreach($Events as $event){
-            $dateTime = date_format($event->getDate(),"Y-m-d");
-            if($date == $dateTime){
+        foreach ($Events as $event) {
+            $dateTime = date_format($event->getDate(), "Y-m-d");
+            if ($date == $dateTime) {
                 $events[] = $event;
             }
         }
@@ -149,8 +164,23 @@ class EventController extends Controller
     public function showByThemeAction(Request $request)
     {
         $theme = $request->request->get('theme');
-        $em = $this->getDoctrine()->getManager();
-        $events = $em->getRepository('AppBundle:Event')->findBy(array('theme' => $theme));
+
+        if (empty($theme)) {
+            // recuperation d'uniquement ceux à venir
+            $events = $this->getDoctrine()
+                ->getRepository('AppBundle:Event')
+                ->findAllGreaterThanDate(date('Y-m-d H:i:s'));
+
+        } else {
+                   // $em = $this->getDoctrine()->getManager();
+        // $events = $em->getRepository('AppBundle:Event')->findBy(array('theme' => $theme));
+
+         // recuperation d'uniquement ceux à venir
+            $events = $this->getDoctrine()
+                ->getRepository('AppBundle:Event')
+                ->findByTheme(date('Y-m-d H:i:s'), $theme);
+        }
+
 
         return $this->render('event/index.html.twig', array(
             'events' => $events,
@@ -174,7 +204,6 @@ class EventController extends Controller
 
             return $this->redirectToRoute('event_edit', array('id' => $event->getId()));
         }
-
         return $this->render('event/edit.html.twig', array(
             'event' => $event,
             'edit_form' => $editForm->createView(),

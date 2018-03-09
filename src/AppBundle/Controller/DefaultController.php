@@ -56,7 +56,12 @@ class DefaultController extends Controller
             $request->getSession()->set('style', 'css/' . $style . '.css');
             // dump($request->getSession());
         }
+
+
         $referer = $request->headers->get('referer');
+        if( strpos($referer, "/event/")){
+
+        }
         return $this->redirect($referer);
     }
 

@@ -30,4 +30,45 @@ class EventRepository extends \Doctrine\ORM\EntityRepository
         // to get just one result:
         // $product = $qb->setMaxResults(1)->getOneOrNullResult();
     }
+    /**
+     * @param $date,$place
+     * @return Event[]
+     */
+    public function findByPlace($date,$place)
+    {
+        // automatically knows to select Products
+        // the "p" is an alias you'll use in the rest of the query
+        $qb = $this->createQueryBuilder('e')
+            ->where('e.date > :date')
+            ->andWhere('e.place = :place')
+            ->setParameter('date',$date )
+            ->setParameter('place',$place )
+            ->getQuery();
+
+        return $qb->execute();
+
+        // to get just one result:
+        // $product = $qb->setMaxResults(1)->getOneOrNullResult();
+    }
+    /**
+     * @param $date,$theme
+     * @return Event[]
+     */
+    public function findByTheme($date,$theme)
+    {
+        // automatically knows to select Products
+        // the "p" is an alias you'll use in the rest of the query
+        $qb = $this->createQueryBuilder('e')
+            ->where('e.date > :date')
+            ->andWhere('e.theme = :theme')
+            ->setParameter('date',$date )
+            ->setParameter('theme',$theme )
+            ->getQuery();
+
+        return $qb->execute();
+
+        // to get just one result:
+        // $product = $qb->setMaxResults(1)->getOneOrNullResult();
+    }
+
 }

@@ -5,8 +5,8 @@ edit.event: 'éditer évènement'
 myinscriptions: 'mes inscriptions'
 logout: Déconnexion
 listparticipant: 'Liste des participants'
-user.lastname: 'Nom'
-user.firstname: 'Prénom'
+user.lastname: Nom
+user.firstname: Prénom
 event.list: 'Liste des évènements'
 event.tri: 'Recherche avancée'
 event.byplace: 'Par lieu'
@@ -40,3 +40,4 @@ inscription.create: Créer
 register: 'S''inscrire'
 language: Langue
 theme: Theme
+rss: rss

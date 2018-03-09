@@ -4,9 +4,17 @@ test: 'this is a test'
 edit.event: 'Edit event'
 myinscriptions: 'My inscriptions'
 logout: Logout
+listparticipant: 'list of participants'
+user.lastname: 'Lastname'
+user.firstname: 'Firstname'
 event.list: 'Event list'
+event.tri: 'Advanced Search'
+event.byplace: 'By place'
+event.bydate: 'By date'
+event.bytheme: 'By theme'
 event.create: 'Create event'
 event.title: Title
+event.theme: Theme
 event.nbplace: nbPlace
 event.date: Date
 event.action: Action
@@ -29,5 +37,6 @@ event.editing: 'Event Edit'
 event.creation: 'Event Create'
 inscription.creation: 'Inscription Create'
 inscription.create: Create
-register: "Register"
-language: 'Language'
+register: Register
+language: Language
+theme: Theme
