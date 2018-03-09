@@ -1,13 +1,13 @@
 home: Accueil
-events: Evènements
+events: Evénements
 test: 'ceci est un test'
-edit.event: 'éditer évènement'
+edit.event: 'éditer événements'
 myinscriptions: 'mes inscriptions'
 logout: Déconnexion
 listparticipant: 'Liste des participants'
 user.lastname: Nom
 user.firstname: Prénom
-event.list: 'Liste des évènements'
+event.list: 'Liste des événements'
 event.tri: 'Recherche avancée'
 event.byplace: 'Par lieu'
 event.bydate: 'Par date'
@@ -20,6 +20,8 @@ event.date: Date
 event.action: Action
 event.show: Voir
 event.edit: Modifier
+event.complet: Evénement complet
+event.placerest: Place restante :
 event.description: Description
 event.place: Lieu
 event.delete: Supprimer
@@ -33,8 +35,8 @@ inscription.unsubscribe: 'Se désinscrire'
 myprofile: 'Mon Profil'
 welcome: Bienvenue
 inscriptions: Inscriptions
-event.editing: 'Editer évènement'
-event.creation: 'Creation évènement'
+event.editing: 'Editer événement'
+event.creation: 'Creation événement'
 inscription.creation: 'Creation inscriptions'
 inscription.create: Créer
 register: 'S''inscrire'

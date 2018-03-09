@@ -55,7 +55,8 @@
                 {{ form_end(delete_form) }}
 
             {% else %}
-
+                {% if event.nbplace != nbindividu %}
+                    <h4>{{'event.placerest'|trans}}{{ event.nbplace - nbindividu }}</h4>
                 <form action="{{ path("inscription_new" , { 'id': event.id })}} " method="post">
 
                     <input hidden="hidden" type="checkbox" id="id_event" name="id" value="{{event.id}}"/>
@@ -63,7 +64,9 @@
                     <input class="btn btn-success col-sm-4" type="submit" value="{{'event.participation'|trans}}">
 
                 </form>
-
+                    {% else %}
+                    <h4>{{'event.complet'|trans}}</h4>
+                    {% endif %}
             {% endif %}
 
             <a class="btn btn-primary  col-sm-4" href="{{ path('event_index') }}">{{'event.backtolist'|trans}}</a>

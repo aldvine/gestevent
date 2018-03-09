@@ -87,7 +87,7 @@ class EventController extends Controller
 
         $em = $this->getDoctrine()->getManager();
         $inscriptions = $em->getRepository('AppBundle:Inscription')->findBy(array('event' => $event->getId()));
-
+        $nbindividu = count($inscriptions);
         $users = new ArrayCollection();
         foreach ($inscriptions as $inscription) {
 
@@ -99,6 +99,7 @@ class EventController extends Controller
         return $this->render('event/show.html.twig', array(
             'users' => $users,
             'event' => $event,
+            'nbindividu' => $nbindividu,
             'delete_form' => $deleteForm->createView(),
         ));
     }
