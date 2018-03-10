@@ -20,8 +20,8 @@ event.date: Date
 event.action: Action
 event.show: Voir
 event.edit: Modifier
-event.complet: Evénement complet
-event.placerest: Place restante :
+event.complet: 'Evénement complet'
+event.placerest: 'Place restante'
 event.description: Description
 event.place: Lieu
 event.delete: Supprimer

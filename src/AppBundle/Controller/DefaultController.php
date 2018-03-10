@@ -60,9 +60,10 @@ class DefaultController extends Controller
 
         $referer = $request->headers->get('referer');
         if( strpos($referer, "/event/")){
-
+            return $this->redirectToRoute('event_index');
+        }else{
+            return $this->redirect($referer);   
         }
-        return $this->redirect($referer);
     }
 
 
