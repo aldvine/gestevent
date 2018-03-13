@@ -47,14 +47,14 @@
 
         {# affichage de edit et delete uniquement si c'est l'utilisateur qui a creer l'evenement #}
    <div class="text-center">
-        {% if event.user.id == app.user.id %}
+        {% if event.user.id == app.user.id or is_granted("ROLE_ADMIN")%}
                 <a class="btn btn-warning col-sm-4 " href="{{ path('event_edit', { 'id': event.id }) }}">{{'event.edit'|trans}}</a>
 
                 {{ form_start(delete_form) }}
                 <input class="btn btn-danger col-sm-4" type="submit" value="{{'event.delete'|trans}}">
                 {{ form_end(delete_form) }}
 
-            {% else %}
+            {% if event.user.id != app.user.id or is_granted("ROLE_ADMIN") %}
                 {% if event.nbplace != nbindividu %}
                     <h4>{{'event.placerest'|trans}} : {{ event.nbplace - nbindividu }}</h4>
                 <form action="{{ path("inscription_new" , { 'id': event.id })}} " method="post">
@@ -68,6 +68,7 @@
                     <h4>{{'event.complet'|trans}}</h4>
                     {% endif %}
             {% endif %}
+         {% endif %}
 
             <a class="btn btn-primary  col-sm-4" href="{{ path('event_index') }}">{{'event.backtolist'|trans}}</a>
         </div>

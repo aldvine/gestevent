@@ -67,7 +67,7 @@
                             {# affichage de edit uniquement si c'est l'utilisateur qui a creer l'evenement #}
 
                             <a class="btn btn-primary" href="{{ path('event_show', { 'id': event.id }) }}">{{'event.show'|trans}}</a>
-                            {% if event.user.id == app.user.id %}
+                            {% if event.user.id == app.user.id or is_granted("ROLE_ADMIN") %}
 
                                 <a class="btn btn-warning " href="{{ path('event_edit', { 'id': event.id }) }}">{{'event.edit'|trans}}</a>
 
