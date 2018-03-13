@@ -6,11 +6,12 @@
         {% form_theme edit_form 'bootstrap_4_layout.html.twig' %}
         {{ form_start(edit_form) }}
         {{ form_widget(edit_form) }}
-        <input class="btn btn-success" type="submit" value="Edit"/>
+      
+        <input class="btn btn-success" type="submit" value="{{'event.edit'|trans}}"/>
         {{ form_end(edit_form) }}
 
         {{ form_start(delete_form) }}
-        <input class="btn btn-danger" type="submit" value="Delete">
+        <input class="btn btn-danger" type="submit" value="{{'event.delete'|trans}}">
         {{ form_end(delete_form) }}
         <a class="btn btn-primary" href="{{ path('event_index') }}">{{'event.backtolist'|trans}}</a>
     </div>

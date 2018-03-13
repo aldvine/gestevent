@@ -3,34 +3,50 @@
 {% block body %}
     <h1>{{'event.list'|trans}}</h1>
     <div class="text-center">
-        <a class="btn btn-primary " href="{{ path('event_new') }}">{{'event.create'|trans}}</a>
+        <a class="btn btn-success " href="{{ path('event_new') }}">{{'event.create'|trans}}</a>
 
     <h3>{{'event.tri'|trans}}</h3>
+    <div class="row">
+    <div class=" mx-auto card bg-secondary">
+        <div class="card-body ">
 
-    <form action="{{ path("event_showByPlace" )}} " method="post">
+            <form action="{{ path("event_showByPlace" )}} " class="form-inline " style="display:block" method="post">
 
-            <input type="text" id="place" name="place"/>
+                <div class=" form-group justify-content-center ">
+                    <div>
+                        <input type="text" class="form-control " id="place" name="place"/>
+                    </div>
+                    <div>
+                        <input class="btn btn-info form-control " type="submit" value="{{'event.byplace'|trans}}">
+                    </div>
+                </div>
+            </form>
 
-            <input class="btn btn-info " type="submit" value="{{'event.byplace'|trans}}">
+     
+            <form action="{{ path("event_showByDate" )}} " class=" form-inline " style="display:block" method="post">
+                <div class=" form-group justify-content-center   ">
+                    <div>
+                        <input type="date" id="date" class=" form-control " name="date"/>
+                    </div>
+                    <div>
+                        <input class="btn btn-info  form-control  " type="submit" value="{{'event.bydate'|trans}}">
+                    </div>
+                </div>
+            </form>
 
-        </form>
-
-    <form action="{{ path("event_showByDate" )}} " method="post">
-
-            <input type="date" id="date" name="date"/>
-
-            <input class="btn btn-info " type="submit" value="{{'event.bydate'|trans}}">
-
-    </form>
-
-    <form action="{{ path("event_showByTheme" )}} " method="post">
-
-        <input type="text" id="theme" name="theme"/>
-
-        <input class="btn btn-info " type="submit" value="{{'event.bytheme'|trans}}">
-
-    </form>
-
+            <form action="{{ path("event_showByTheme" )}}" class="form-inline  " style="display:block" method="post">
+                <div class=" form-group justify-content-center ">
+                    <div>
+                        <input type="text" id="theme" class=" form-control " name="theme"/>
+                    </div>
+                    <div>
+                        <input class="btn btn-info  form-control " type="submit" value="{{'event.bytheme'|trans}}">
+                    </div>
+                </div>
+            </form>
+            </div>
+        </div>
+    </div>
     </div>
 
     <br>
@@ -40,7 +56,7 @@
                 {# <th>Id</th> #}
                 <th>{{'event.title'|trans}}</th>
                 {# <th>Description</th> #}
-                <th>{{'event.nbplace'|trans}}</th>
+                {# <th>{{'event.nbplace'|trans}}</th> #}
                 <th>{{'event.theme'|trans}}</th>
                 <th>{{'event.date'|trans}}</th>
                 {# <th>Place</th> #}
@@ -55,7 +71,7 @@
                         {# <td><a href="{{ path('event_show', { 'id': event.id }) }}">{{ event.id }}</a></td> #}
                         <td>{{ event.title }}</td>
                         {# <td>{{ event.description }}</td> #}
-                        <td>{{ event.nbPlace }}</td>
+                        {# <td>{{ event.nbPlace }}</td> #}
                         <td>{{ event.theme }}</td>
                         <td>
                             {% if event.date %}{{ event.date|date('d/m/Y') }}
@@ -80,7 +96,7 @@
         </tbody>
     </table>
     <div class="text-center">
-        <a class="btn btn-primary " href="{{ path('event_new') }}">{{'event.create'|trans}}</a>
+        <a class="btn btn-success " href="{{ path('event_new') }}">{{'event.create'|trans}}</a>
 
     </div>
 {% endblock %}
