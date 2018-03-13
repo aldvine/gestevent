@@ -53,8 +53,11 @@ class InscriptionController extends Controller
         $em = $this->getDoctrine()->getManager();
         $event = $em->getRepository('AppBundle:Event')->findOneBy(array('id' => $id));
         $resp = $em->getRepository('AppBundle:Inscription')->findOneBy(array('user' => $this->getUser(),'event'=>$event));
-       
-        if(empty($resp)){
+
+        $inscriptions = $em->getRepository('AppBundle:Inscription')->findBy(array('event' => $id));
+        $nbindividu = count($inscriptions);
+
+        if(empty($resp) && $nbindividu<$event->getNbPlace()){
             $inscription = new Inscription();
             $inscription->setDate(date_create());
             $inscription->setUser($this->getUser());
