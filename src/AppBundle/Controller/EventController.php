@@ -117,9 +117,7 @@ class EventController extends Controller
     
           $place = $request->request->get('place');
     
-        if (empty($place)) {
-            $this->redirect($this->generateUrl('event_index'));
-        } else {
+        
  // $em = $this->getDoctrine()->getManager();
         // $events = $em->getRepository('AppBundle:Event')->findBy(array('place' => $place));
 
@@ -127,7 +125,7 @@ class EventController extends Controller
             $events = $this->getDoctrine()
                 ->getRepository('AppBundle:Event')
                 ->findByPlace(date('Y-m-d H:i:s'), $place);
-        }
+        
         
         return $this->render('event/index.html.twig', array(
             'events' => $events,
