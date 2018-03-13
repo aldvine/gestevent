@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Event
@@ -49,6 +50,10 @@ class Event
      * @var int
      *
      * @ORM\Column(name="nbPlace", type="integer")
+     *   @Assert\Range(
+     *      min = 1,
+     *  
+     * )
      */
     private $nbPlace;
 
@@ -56,6 +61,11 @@ class Event
      * @var \DateTime
      *
      * @ORM\Column(name="date", type="datetime")
+     *  @Assert\Range(
+     *      min = "now",
+     *     
+     *  
+     * )
      */
     private $date;
 
@@ -63,6 +73,7 @@ class Event
      * @var string
      *
      * @ORM\Column(name="place", type="string", length=500, nullable=true)
+     * 
      */
     private $place;
 
