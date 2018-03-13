@@ -43,3 +43,5 @@ register: Register
 language: Language
 theme: Theme
 rss: rss
+homepage.explication: "With gestevent, you can organize and participate in events!"
+homepage.choix: "So, what would you like to do ?"

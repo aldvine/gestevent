@@ -1,11 +1,11 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
 <div class="fos_user_user_show">
-    <p>{{ 'profile.show.username'|trans }}: {{ user.username }}</p>
-    <p>{{ 'profile.show.email'|trans }}: {{ user.email }}</p>
+    <p><h5>{{ 'profile.show.username'|trans }}</h5> {{ user.username }}</p>
+    <p><h5>{{ 'profile.show.email'|trans }}</h5> {{ user.email }}</p>
     
-    <p>{{ 'profile.show.firstname'|trans }}: {{ user.firstname }}</p>
-    <p>{{ 'profile.show.lastname'|trans }}: {{ user.lastname }}</p>
+    <p><h5>{{ 'profile.show.firstname'|trans }}</h5> {{ user.firstname }}</p>
+    <p><h5>{{ 'profile.show.lastname'|trans }}</h5> {{ user.lastname }}</p>
     <a class="btn btn-warning" href="{{ path('fos_user_profile_edit') }}">{{'profile.edit.submit'|trans}}</a>
     <a class="btn btn-warning" href="{{ path('fos_user_change_password') }}">{{'change_password.submit'|trans}}</a>
 

@@ -1,13 +1,13 @@
 home: Accueil
-events: Evénements
+events: Evènements
 test: 'ceci est un test'
-edit.event: 'éditer événements'
+edit.event: 'éditer évènements'
 myinscriptions: 'mes inscriptions'
 logout: Déconnexion
 listparticipant: 'Liste des participants'
 user.lastname: Nom
 user.firstname: Prénom
-event.list: 'Liste des événements'
+event.list: 'Liste des évènements'
 event.tri: 'Recherche avancée'
 event.byplace: 'Par lieu'
 event.bydate: 'Par date'
@@ -20,7 +20,7 @@ event.date: Date
 event.action: Action
 event.show: Voir
 event.edit: Modifier
-event.complet: 'Evénement complet'
+event.complet: 'Evènement complet'
 event.placerest: 'Place restante'
 event.description: Description
 event.place: Lieu
@@ -35,11 +35,13 @@ inscription.unsubscribe: 'Se désinscrire'
 myprofile: 'Mon Profil'
 welcome: Bienvenue
 inscriptions: Inscriptions
-event.editing: 'Editer événement'
-event.creation: 'Creation événement'
+event.editing: 'Editer évènement'
+event.creation: 'Creation évènement'
 inscription.creation: 'Creation inscriptions'
 inscription.create: Créer
 register: 'S''inscrire'
 language: Langue
 theme: Theme
 rss: rss
+homepage.explication: "Avec gestevent, vous pouvez vous organiser et participer à des évènements !"
+homepage.choix: "Alors que souhaitez-vous faire ?"
