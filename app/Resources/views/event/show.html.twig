@@ -3,8 +3,7 @@
 {% block body %}
     <div class=" container">
 
-        <h1>Event</h1>
-
+        <h1>{{'event'|trans}}</h1>
         <table class="table ">
             <tbody>
             {# <tr>
@@ -53,8 +52,8 @@
                 {{ form_start(delete_form) }}
                 <input class="btn btn-danger col-sm-4" type="submit" value="{{'event.delete'|trans}}">
                 {{ form_end(delete_form) }}
-
-            {% if event.user.id != app.user.id or is_granted("ROLE_ADMIN") %}
+        {% endif %}
+            {% if event.user.id != app.user.id %}
                 {% if event.nbplace != nbindividu %}
                     <h4>{{'event.placerest'|trans}} : {{ event.nbplace - nbindividu }}</h4>
                 <form action="{{ path("inscription_new" , { 'id': event.id })}} " method="post">
@@ -68,7 +67,7 @@
                     <h4>{{'event.complet'|trans}}</h4>
                     {% endif %}
             {% endif %}
-         {% endif %}
+
 
             <a class="btn btn-primary  col-sm-4" href="{{ path('event_index') }}">{{'event.backtolist'|trans}}</a>
         </div>
@@ -80,11 +79,23 @@
             <tr>
                 <th>{{'user.lastname'|trans}}</th>
                 <th>{{'user.firstname'|trans}}</th>
+                {% if is_granted("ROLE_ADMIN") %}
+                    <th>{{'event.action'|trans}}</th>
+                {% endif %}
             </tr>
-            {% for user in users %}
+            {% for key,user in users %}
                     <tr>
                         <td>{{ user.lastname }}</td>
                         <td>{{ user.firstname }}</td>
+
+                    {% if is_granted("ROLE_ADMIN") %}
+                    <td>
+                        <form action="{{ path("inscription_delete" , { 'id':  key })}} " method="post">
+                            <input hidden="hidden" type="text" id="id_inscription" name="id" value="{{ key }}"/>
+                            <input class="btn btn-danger " type="submit" value="{{'inscription.unsubscribe'|trans}}">
+                        </form>
+                    </td>
+                    {% endif %}
                     </tr>
             {% endfor %}
             </tbody>

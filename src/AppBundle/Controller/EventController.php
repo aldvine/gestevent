@@ -92,8 +92,8 @@ class EventController extends Controller
         foreach ($inscriptions as $inscription) {
 
             $user = $em->getRepository('AppBundle:User')->findOneBy(array('id' => $inscription->getUser()->getId()));
-
-            $users[] = $user;
+            $id = $inscription->getId();
+            $users["$id"] = $user;
         }
 
         return $this->render('event/show.html.twig', array(

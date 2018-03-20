@@ -1,0 +1,90 @@
+[33mcommit 1e7877981dafa038662d327bf5bb238a2ec4a533[m[33m ([m[1;36mHEAD -> [m[1;32mdev[m[33m, [m[1;31morigin/dev[m[33m)[m
+Author: Aldvine Blanchard <aldvine.blanchard@gmail.com>
+Date:   Thu Mar 8 12:05:26 2018 +0100
+
+    design bootstrap + modification des formulaire et ajout de l'édition du profil
+
+[33mcommit 761a99d8bf53897a53117165c927a3667e905156[m
+Author: Aldvine Blanchard <aldvine.blanchard@gmail.com>
+Date:   Wed Mar 7 16:33:06 2018 +0100
+
+    Ajout de vues, ajout de controleurs et fonctionnalités clés, design
+
+[33mcommit 65cb7d725fe6874a10595c5165c03f6646dd6e98[m
+Author: aloiseau1 <loiseau297@gmail.com>
+Date:   Tue Mar 6 20:02:13 2018 +0100
+
+    EventController+View
+
+[33mcommit 41a1d631cf29dd848430f0d5ef993a80da4c0781[m
+Merge: 764b0bc 2ebdd2e
+Author: aloiseau1 <loiseau297@gmail.com>
+Date:   Tue Mar 6 15:37:52 2018 +0100
+
+    Merge branch 'dev' of https://github.com/aldvine/gestevent into dev
+
+[33mcommit 764b0bc8522c8ce19f536ada64c144c3a5225ccf[m
+Author: aloiseau1 <loiseau297@gmail.com>
+Date:   Tue Mar 6 15:36:54 2018 +0100
+
+    ControllerEvent
+
+[33mcommit 2ebdd2e984b8fa10bc23fe627a4ffbb6f6c5d755[m
+Author: Aldvine Blanchard <aldvine.blanchard@gmail.com>
+Date:   Tue Mar 6 15:35:47 2018 +0100
+
+    ajout d'une navbar
+
+[33mcommit e80790d3288634c46c45a3bc0563f889dbafc45f[m
+Author: Aldvine Blanchard <aldvine.blanchard@gmail.com>
+Date:   Tue Mar 6 15:16:19 2018 +0100
+
+    modification de la page de login
+
+[33mcommit 836e02976b623c91615ac51d61674bf399b4b763[m
+Author: Aldvine Blanchard <aldvine.blanchard@gmail.com>
+Date:   Tue Mar 6 12:20:51 2018 +0100
+
+    modification de traduction, et fichier de config
+
+[33mcommit aff63d5ff9b3d9c764c8054f067986bcf9b66bd7[m
+Author: Aldvine Blanchard <aldvine.blanchard@gmail.com>
+Date:   Tue Mar 6 11:01:26 2018 +0100
+
+    modification des route avec la vairable _locale
+
+[33mcommit e9db0b32a745fe62e378d05a0fee22457b2c8eb9[m
+Author: Aldvine Blanchard <aldvine.blanchard@gmail.com>
+Date:   Tue Mar 6 10:53:12 2018 +0100
+
+    ajout de controller pour Event et User et surcharge des vues FOS
+
+[33mcommit 36ea0fd0a81c8fb2c97f9ff432937c1c924b92c2[m[33m ([m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: Aldvine Blanchard <aldvine.blanchard@gmail.com>
+Date:   Mon Mar 5 15:55:23 2018 +0100
+
+    creation des classes
+
+[33mcommit cd19c432d5259e1d3928071253cacfc60f7cf572[m
+Author: Aldvine Blanchard <aldvine.blanchard@gmail.com>
+Date:   Mon Mar 5 13:13:11 2018 +0100
+
+    ajout de fosuserbundle et config
+
+[33mcommit 78d0de0ac94c181416e89158649435f5319461b9[m
+Author: Aldvine Blanchard <aldvine.blanchard@gmail.com>
+Date:   Mon Mar 5 13:02:24 2018 +0100
+
+    ajout et parametrage simple de fosuserbundle
+
+[33mcommit 324bd4cea4e8da6c1b06f68cb6368ae8a8dc4d40[m
+Author: Aldvine Blanchard <aldvine.blanchard@gmail.com>
+Date:   Mon Mar 5 11:20:10 2018 +0100
+
+    ajout des fichiers de config
+
+[33mcommit e999408146667fb5fe4366f3fcdda67921a15063[m
+Author: Aldvine Blanchard <aldvine.blanchard@gmail.com>
+Date:   Sun Feb 18 11:38:55 2018 +0100
+
+    mise en place de symfony
