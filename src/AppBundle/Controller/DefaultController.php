@@ -9,7 +9,7 @@ use Suin\RSSWriter\Feed;
 use Suin\RSSWriter\Channel;
 use Suin\RSSWriter\Item;
 use Symfony\Component\HttpFoundation\Response;
-use WhiteOctober\BreadcrumbsBundle\WhiteOctoberBreadcrumbsBundle;
+
 
 /**
  * @Route("/")

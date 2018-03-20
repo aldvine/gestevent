@@ -9,44 +9,45 @@
     <div class="row">
     <div class=" mx-auto card bg-secondary">
         <div class="card-body ">
-            <div class="row">
-            <form action="{{ path("event_showByPlace" )}} " class="form-inline "  method="post">
-
-                <div class=" form-group  ">
-                    <div class="col">
-                        <input type="text" class="form-control " id="place" name="place"/>
-                    </div>
-                    <div class="col">
-                        <input class="btn btn-info form-control " type="submit" value="{{'event.byplace'|trans}}">
-                    </div>
-                </div>
-            </form>
-        </div>
-         <div class="row">
-            <form action="{{ path("event_showByDate" )}} " class=" form-inline "  method="post">
-                <div class=" form-group  ">
-                    <div class="col">
-                        <input type="date" id="date" class=" form-control " name="date"/>
-                    </div>
-                    <div class="col">
-                        <input class="btn btn-info  form-control  " type="submit" value="{{'event.bydate'|trans}}">
-                    </div>
-                </div>
-            </form>
-            </div>
         <div class="row">
-            <form action="{{ path("event_showByTheme" )}}" class="form-inline  "  method="post">
-                <div class="form-group ">
-                    <div class="col">
-                        <input type="text" id="theme" class=" form-control " name="theme"/>
+            <div class="col">
+                <form action="{{ path("event_showByPlace" )}} "   method="post">
+                    <div class=" form-group  ">
+                        <div>
+                            <input type="text" class="form-control " id="place" name="place"/>
+                        </div>
+                        <div >
+                            <input class="btn btn-info btn-block " type="submit" value="{{'event.byplace'|trans}}">
+                        </div>
                     </div>
-                    <div class="col">
-                        <input class="btn btn-info  form-control " type="submit" value="{{'event.bytheme'|trans}}">
+                </form>
+            </div>
+             <div class="col">
+                <form action="{{ path("event_showByDate" )}} "   method="post">
+                    <div class=" form-group  ">
+                        <div >
+                            <input type="date" id="date" class=" form-control  " name="date"/>
+                        </div>
+                        <div >
+                            <input class="btn btn-info btn-block  " type="submit" value="{{'event.bydate'|trans}}">
+                        </div>
                     </div>
+                </form>
+            </div>
+                <div class="col" >
+                    <form action="{{ path("event_showByTheme" )}}"  method="post">
+                        <div class="form-group ">
+                            <div>
+                                <input type="text" id="theme" class=" form-control " name="theme"/>
+                            </div>
+                            <div>
+                                <input class="btn btn-info btn-block" type="submit" value="{{'event.bytheme'|trans}}">
+                            </div>
+                        </div>
+                    </form>
                 </div>
-            </form>
             </div>
-            </div>
+        </div>
         </div>
     </div>
     </div>
