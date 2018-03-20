@@ -1,15 +1,15 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<div class="container">
+<div class="container ">
     <h1>{{'event.creation'|trans}}</h1>
     
     {% form_theme form 'bootstrap_4_layout.html.twig' %}
     {{ form_start(form) }}
     {{ form_widget(form) }}
-    <input class="btn btn-success" type="submit" value="{{'event.create'|trans}}"/>
+    <input class="btn btn-success col-sm-4" type="submit" value="{{'event.create'|trans}}"/>
     {{ form_end(form) }}
 
-    <a class="btn btn-primary" href="{{ path('event_index') }}">{{'event.backtolist'|trans}}</a>
+    <a class="btn btn-primary col-sm-4 " href="{{ path('event_index') }}">{{'event.backtolist'|trans}}</a>
 </div>
 {% endblock %}

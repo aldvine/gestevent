@@ -25,8 +25,9 @@
         <style type="text/css">
 
         </style>
-
+       
         {% include 'default/home.html.twig' %}
+         {{ wo_render_breadcrumbs() }}
     <br>
         <div class="container ">
             {% block body %}{% endblock %}

@@ -30,6 +30,7 @@ class InscriptionController extends Controller
         // liste uniquement de ses inscriptions
         $inscriptions = $em->getRepository('AppBundle:Inscription')->findBy(array('user' => $this->getUser()));
         $events = new ArrayCollection();
+        $breadcrumbs = $this->getBreadcrumbs();
         foreach($inscriptions as $inscription){
             $event = $em->getRepository('AppBundle:Event')->findOneBy(array('id' => $inscription->getEvent()->getId()));
             $id = $inscription->getId();
@@ -41,7 +42,12 @@ class InscriptionController extends Controller
             'events' => $events,
         ));
     }
-
+    public function getBreadcrumbs(){
+        $breadcrumbs = $this->get("white_october_breadcrumbs");
+        // Simple example
+        $breadcrumbs->addRouteItem($this->get('translator')->trans('inscription.list'), "inscription_index");
+        return $breadcrumbs;
+    }
     /**
      * Creates a new inscription entity.
      *
@@ -81,6 +87,7 @@ class InscriptionController extends Controller
     {
         $deleteForm = $this->createDeleteForm($inscription);
 
+        
         $em = $this->getDoctrine()->getManager();
         $event = $em->getRepository('AppBundle:Event')->findOneBy(array('id' => $inscription->getEvent()->getId()));
         $inscriptions = $em->getRepository('AppBundle:Inscription')->findBy(array('event' => $event->getId()));
@@ -89,7 +96,11 @@ class InscriptionController extends Controller
             $user = $em->getRepository('AppBundle:User')->findOneBy(array('id' => $inscription->getUser()->getId()));
             $users[] = $user;
         }
-
+        $breadcrumbs = $this->getBreadcrumbs();
+        $breadcrumbs->addRouteItem($this->get('translator')->trans('inscription').' '.$inscription->getId(), "inscription_show",[
+            'id' => $inscription->getId(),
+        ]);
+        
         return $this->render('inscription/show.html.twig', array(
             'users' => $users,
             'event' => $event,

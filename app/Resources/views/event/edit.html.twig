@@ -7,12 +7,12 @@
         {{ form_start(edit_form) }}
         {{ form_widget(edit_form) }}
       
-        <input class="btn btn-success" type="submit" value="{{'event.edit'|trans}}"/>
+        <input class="btn btn-success col-sm-4" type="submit" value="{{'event.edit'|trans}}"/>
         {{ form_end(edit_form) }}
 
         {{ form_start(delete_form) }}
-        <input class="btn btn-danger" type="submit" value="{{'event.delete'|trans}}">
+        <input class="btn btn-danger col-sm-4" type="submit" value="{{'event.delete'|trans}}">
         {{ form_end(delete_form) }}
-        <a class="btn btn-primary" href="{{ path('event_index') }}">{{'event.backtolist'|trans}}</a>
+        <a class="btn btn-primary col-sm-4" href="{{ path('event_index') }}">{{'event.backtolist'|trans}}</a>
     </div>
 {% endblock %}

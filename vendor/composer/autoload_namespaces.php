@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'WhiteOctober\\BreadcrumbsBundle' => array($vendorDir . '/whiteoctober/breadcrumbs-bundle'),
     'Twig_' => array($vendorDir . '/twig/twig/lib'),
     'Suin\\RSSWriter' => array($vendorDir . '/suin/php-rss-writer/src'),
     'SensioLabs\\Security' => array($vendorDir . '/sensiolabs/security-checker'),

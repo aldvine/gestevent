@@ -9,41 +9,43 @@
     <div class="row">
     <div class=" mx-auto card bg-secondary">
         <div class="card-body ">
+            <div class="row">
+            <form action="{{ path("event_showByPlace" )}} " class="form-inline "  method="post">
 
-            <form action="{{ path("event_showByPlace" )}} " class="form-inline " style="display:block" method="post">
-
-                <div class=" form-group justify-content-center ">
-                    <div>
+                <div class=" form-group  ">
+                    <div class="col">
                         <input type="text" class="form-control " id="place" name="place"/>
                     </div>
-                    <div>
+                    <div class="col">
                         <input class="btn btn-info form-control " type="submit" value="{{'event.byplace'|trans}}">
                     </div>
                 </div>
             </form>
-
-     
-            <form action="{{ path("event_showByDate" )}} " class=" form-inline " style="display:block" method="post">
-                <div class=" form-group justify-content-center   ">
-                    <div>
+        </div>
+         <div class="row">
+            <form action="{{ path("event_showByDate" )}} " class=" form-inline "  method="post">
+                <div class=" form-group  ">
+                    <div class="col">
                         <input type="date" id="date" class=" form-control " name="date"/>
                     </div>
-                    <div>
+                    <div class="col">
                         <input class="btn btn-info  form-control  " type="submit" value="{{'event.bydate'|trans}}">
                     </div>
                 </div>
             </form>
-
-            <form action="{{ path("event_showByTheme" )}}" class="form-inline  " style="display:block" method="post">
-                <div class=" form-group justify-content-center ">
-                    <div>
+            </div>
+        <div class="row">
+            <form action="{{ path("event_showByTheme" )}}" class="form-inline  "  method="post">
+                <div class="form-group ">
+                    <div class="col">
                         <input type="text" id="theme" class=" form-control " name="theme"/>
                     </div>
-                    <div>
+                    <div class="col">
                         <input class="btn btn-info  form-control " type="submit" value="{{'event.bytheme'|trans}}">
                     </div>
                 </div>
             </form>
+            </div>
             </div>
         </div>
     </div>
@@ -78,14 +80,14 @@
                             {% endif %}
                         </td>
                         {# <td>{{ event.place }}</td> #}
-                        <td>
+                        <td class="row">
 
                             {# affichage de edit uniquement si c'est l'utilisateur qui a creer l'evenement #}
 
-                            <a class="btn btn-primary" href="{{ path('event_show', { 'id': event.id }) }}">{{'event.show'|trans}}</a>
+                            <a class="btn btn-primary col" href="{{ path('event_show', { 'id': event.id }) }}">{{'event.show'|trans}}</a>
                             {% if event.user.id == app.user.id or is_granted("ROLE_ADMIN") %}
 
-                                <a class="btn btn-warning " href="{{ path('event_edit', { 'id': event.id }) }}">{{'event.edit'|trans}}</a>
+                                <a class="btn btn-warning col " href="{{ path('event_edit', { 'id': event.id }) }}">{{'event.edit'|trans}}</a>
 
                             {% endif %}
 

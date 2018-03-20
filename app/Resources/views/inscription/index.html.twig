@@ -23,17 +23,19 @@
                         {% if event.date %}{{ event.date|date('d/m/Y H:i') }}
                         {% endif %}
                     </td>
-                    <td>
-                        <a class="btn btn-primary" href="{{ path('inscription_show', { 'id': key }) }}">{{'inscription.show'|trans}}</a>
-                        
-                          <form action="{{ path("inscription_delete" , { 'id':  key })}} " method="post">
+                    <td class="row" >
+                        <div class="col">
+                            <a class="btn btn-primary btn-block " href="{{ path('inscription_show', { 'id': key }) }}">{{'inscription.show'|trans}}</a>
+                        </div>
+                        <div class="col">
+                            <form class=" " action="{{ path("inscription_delete" , { 'id':  key })}} " method="post">
 
-                            <input hidden="hidden" type="text" id="id_inscription" name="id" value="{{key}}"/>
+                                <input hidden="hidden" type="text" id="id_inscription" name="id" value="{{key}}"/>
 
-                            <input class="btn btn-danger " type="submit" value="{{'inscription.unsubscribe'|trans}}">
+                                <input class="btn btn-danger btn-block" type="submit" value="{{'inscription.unsubscribe'|trans}}">
 
-                        </form>
-
+                            </form>
+                        </div>
                     </td>
 
                 </tr>
