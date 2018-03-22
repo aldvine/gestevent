@@ -40,9 +40,9 @@ class EventRepository extends \Doctrine\ORM\EntityRepository
         // the "p" is an alias you'll use in the rest of the query
         $qb = $this->createQueryBuilder('e')
             ->where('e.date > :date')
-            ->andWhere('e.place = :place')
+            ->andWhere('e.place like :place')
             ->setParameter('date',$date )
-            ->setParameter('place',$place )
+            ->setParameter('place',"%".$place."%" )
             ->getQuery();
 
         return $qb->execute();
@@ -60,9 +60,9 @@ class EventRepository extends \Doctrine\ORM\EntityRepository
         // the "p" is an alias you'll use in the rest of the query
         $qb = $this->createQueryBuilder('e')
             ->where('e.date > :date')
-            ->andWhere('e.theme = :theme')
+            ->andWhere('e.theme like :theme')
             ->setParameter('date',$date )
-            ->setParameter('theme',$theme )
+            ->setParameter('theme',"%".$theme."%" )
             ->getQuery();
 
         return $qb->execute();
