@@ -69,6 +69,7 @@ class DefaultController extends Controller
 
 
         $referer = $request->headers->get('referer');
+        // si route event_filter ou autre 
         if( strpos($referer, "/event/")){
             return $this->redirectToRoute('event_index');
         }else{

@@ -72,9 +72,11 @@
             <a class="btn btn-primary  col-sm-4" href="{{ path('event_index') }}">{{'event.backtolist'|trans}}</a>
         </div>
 
+ <div class="  mx-auto card bg-light" style="margin-top:20px;">
+    <div class="card-body ">
          <h2>{{'listparticipant'|trans}}</h2>
-
-        <table class="table ">
+   
+        <table class="table table-striped ">
             <tbody>
             <tr>
                 <th>{{'user.lastname'|trans}}</th>
@@ -100,5 +102,7 @@
             {% endfor %}
             </tbody>
         </table>
+        </div>
+        </div>
     </div>
 {% endblock %}

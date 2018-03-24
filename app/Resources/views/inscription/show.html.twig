@@ -44,21 +44,25 @@
     </form>
     </div>
 
-    <h2>{{'listparticipant'|trans}}</h2>
+    <div class="  mx-auto card bg-light" style="margin-top:20px;">
+        <div class="card-body ">
+            <h2>{{'listparticipant'|trans}}</h2>
 
-    <table class="table ">
-        <tbody>
-        <tr>
-            <th>{{'user.lastname'|trans}}</th>
-            <th>{{'user.firstname'|trans}}</th>
-        </tr>
-        {% for user in users %}
-            <tr>
-                <td>{{ user.lastname }}</td>
-                <td>{{ user.firstname }}</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+            <table class="table table-striped ">
+                <tbody>
+                <tr>
+                    <th>{{'user.lastname'|trans}}</th>
+                    <th>{{'user.firstname'|trans}}</th>
+                </tr>
+                {% for user in users %}
+                    <tr>
+                        <td>{{ user.lastname }}</td>
+                        <td>{{ user.firstname }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            </div>
+        </div>
     </div>
 {% endblock %}

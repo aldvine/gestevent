@@ -1,10 +1,10 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-
-    <div class=" card bg-light " >
-        {# <h5 class="card-header">{{'login.title'|trans}}</h5> #}
-        <div class=" card-body  mx-auto" >
+{# 
+  <div class=" card "  style="border-style:none;">
+        <h5 class="card-header">{{'login.title'|trans}}</h5>
+        <div class=" card-body mx-auto" >  #}   
         <div>
             {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}
                 {{ 'layout.logged_in_as'|trans({'%username%': app.user.username}, 'FOSUserBundle') }}
@@ -32,6 +32,6 @@
             {% block fos_user_content %}{% endblock fos_user_content %}
 
         </div>
-    </div>
-</div>
+    {# </div>
+</div> #}
 {% endblock %}

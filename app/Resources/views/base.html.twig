@@ -21,16 +21,26 @@
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
 
     </head>
-    <body>
-        <style type="text/css">
+    <body  >
 
+        <style type="text/css">
+           body{
+               backgroud-size:cover;
+               background-image:url({{ asset('img/background.jpeg') }}) ; 
+               background-repeat: no-repeat center fixed;
+               -webkit-background-size: cover;
+           }
         </style>
        
         {% include 'default/home.html.twig' %}
          {{ wo_render_breadcrumbs() }}
     <br>
         <div class="container ">
-            {% block body %}{% endblock %}
+            <div class="card" style="margin-bottom:50px;">
+                <div class="card-body">
+                    {% block body %}{% endblock %}
+                </div>
+            </div>
         </div>
 
         

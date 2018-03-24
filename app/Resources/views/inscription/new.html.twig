@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+
     <h1>{{'inscription.creation'|trans}}</h1>
 
         {% form_theme form 'bootstrap_4_layout.html.twig' %}
@@ -12,5 +13,5 @@
 
     
             <a class="btn btn-primary" href="{{ path('inscription_index') }}">{{'inscription.backtolist'|trans}}</a>
-    
+ 
 {% endblock %}

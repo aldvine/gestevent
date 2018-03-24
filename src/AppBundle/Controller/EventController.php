@@ -86,9 +86,9 @@ class EventController extends Controller
     public function showAction(Event $event)
     {
         $deleteForm = $this->createDeleteForm($event);
-        
- 
-        
+
+
+
         $em = $this->getDoctrine()->getManager();
         $inscriptions = $em->getRepository('AppBundle:Inscription')->findBy(array('event' => $event->getId()));
         $nbindividu = count($inscriptions);
@@ -100,7 +100,7 @@ class EventController extends Controller
             $users["$id"] = $user;
         }
         $breadcrumbs = $this->getBreadcrumbs();
-        $breadcrumbs->addRouteItem($this->get('translator')->trans('event.show'), "event_show",[
+        $breadcrumbs->addRouteItem($this->get('translator')->trans('event.show'), "event_show", [
             'id' => $event->getId(),
         ]);
         return $this->render('event/show.html.twig', array(
@@ -121,20 +121,20 @@ class EventController extends Controller
     public function showByPlaceAction(Request $request)
     {
 
-    
-          $place = $request->request->get('place');
-          $breadcrumbs = $this->getBreadcrumbs();
+
+        $place = $request->request->get('place');
+        $breadcrumbs = $this->getBreadcrumbs();
    
         
  // $em = $this->getDoctrine()->getManager();
         // $events = $em->getRepository('AppBundle:Event')->findBy(array('place' => $place));
 
          // recuperation d'uniquement ceux à venir
-            $events = $this->getDoctrine()
-                ->getRepository('AppBundle:Event')
-                ->findByPlace(date('Y-m-d H:i:s'), $place);
-        
-        
+        $events = $this->getDoctrine()
+            ->getRepository('AppBundle:Event')
+            ->findByPlace(date('Y-m-d H:i:s'), $place);
+
+
         return $this->render('event/index.html.twig', array(
             'events' => $events,
         ));
@@ -152,7 +152,7 @@ class EventController extends Controller
         $Events = $this->getDoctrine()->getRepository('AppBundle:Event')->findAllGreaterThanDate(date('Y-m-d H:i:s'));
         $events = new ArrayCollection();
         $breadcrumbs = $this->getBreadcrumbs();
-   
+
         foreach ($Events as $event) {
             $dateTime = date_format($event->getDate(), "Y-m-d");
             if ($date == $dateTime) {
@@ -174,7 +174,7 @@ class EventController extends Controller
     {
         $theme = $request->request->get('theme');
         $breadcrumbs = $this->getBreadcrumbs();
- 
+
         if (empty($theme)) {
             // recuperation d'uniquement ceux à venir
             $events = $this->getDoctrine()
@@ -196,6 +196,35 @@ class EventController extends Controller
             'events' => $events,
         ));
     }
+    /**
+     * Finds and displays a event entity.
+     *
+     * @Route("/Filter", name="event_filter")
+     * @Method("POST")
+     */
+    public function filterAction(Request $request)
+    {
+        $theme = $request->request->get('theme');
+        $place = $request->request->get('place');
+        $title = $request->request->get('title');
+        $date = $request->request->get('date');
+        $breadcrumbs = $this->getBreadcrumbs();
+
+        dump($request->request);
+    
+                   // $em = $this->getDoctrine()->getManager();
+        // $events = $em->getRepository('AppBundle:Event')->findBy(array('theme' => $theme));
+
+         // recuperation d'uniquement ceux à venir
+            $events = $this->getDoctrine()
+                ->getRepository('AppBundle:Event')
+                ->findByFilter(date('Y-m-d H:i:s'), $title, $place, $date, $theme);
+
+
+        return $this->render('event/index.html.twig', array(
+            'events' => $events,
+        ));
+    }
 
     /**
      * Displays a form to edit an existing event entity.
@@ -209,15 +238,15 @@ class EventController extends Controller
         $editForm = $this->createForm('AppBundle\Form\EventType', $event);
         $editForm->handleRequest($request);
 
-     
-       
+
+
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('event_edit', array('id' => $event->getId()));
         }
         $breadcrumbs = $this->getBreadcrumbs();
-        $breadcrumbs->addRouteItem($this->get('translator')->trans('event.edit'), "event_edit",[
+        $breadcrumbs->addRouteItem($this->get('translator')->trans('event.edit'), "event_edit", [
             'id' => $event->getId(),
         ]);
         return $this->render('event/edit.html.twig', array(
@@ -226,7 +255,8 @@ class EventController extends Controller
             'delete_form' => $deleteForm->createView(),
         ));
     }
-    public function getBreadcrumbs(){
+    public function getBreadcrumbs()
+    {
         $breadcrumbs = $this->get("white_october_breadcrumbs");
         // Simple example
         $breadcrumbs->addRouteItem($this->get('translator')->trans('event.list'), "event_index");

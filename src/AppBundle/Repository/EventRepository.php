@@ -11,6 +11,7 @@ namespace AppBundle\Repository;
 class EventRepository extends \Doctrine\ORM\EntityRepository
 {
 
+    // requete sql sur mesure;
 
     /**
      * @param $date
@@ -18,8 +19,7 @@ class EventRepository extends \Doctrine\ORM\EntityRepository
      */
     public function findAllGreaterThanDate($date)
     {
-        // automatically knows to select Products
-        // the "p" is an alias you'll use in the rest of the query
+
         $qb = $this->createQueryBuilder('e')
             ->andWhere('e.date > :date')
             ->setParameter('date',$date )
@@ -27,48 +27,71 @@ class EventRepository extends \Doctrine\ORM\EntityRepository
 
         return $qb->execute();
 
-        // to get just one result:
-        // $product = $qb->setMaxResults(1)->getOneOrNullResult();
-    }
-    /**
-     * @param $date,$place
-     * @return Event[]
-     */
-    public function findByPlace($date,$place)
-    {
-        // automatically knows to select Products
-        // the "p" is an alias you'll use in the rest of the query
-        $qb = $this->createQueryBuilder('e')
-            ->where('e.date > :date')
-            ->andWhere('e.place like :place')
-            ->setParameter('date',$date )
-            ->setParameter('place',"%".$place."%" )
-            ->getQuery();
 
-        return $qb->execute();
-
-        // to get just one result:
-        // $product = $qb->setMaxResults(1)->getOneOrNullResult();
     }
+
+    // // plus utilisé
+    // /**
+    //  * @param $date,$place
+    //  * @return Event[]
+    //  */
+    // public function findByPlace($date,$place)
+    // {
+
+    //     $qb = $this->createQueryBuilder('e')
+    //         ->where('e.date > :date')
+    //         ->andWhere('e.place like :place')
+    //         ->setParameter('date',$date )
+    //         ->setParameter('place',"%".$place."%" )
+    //         ->getQuery();
+
+    //     return $qb->execute();
+
+    // }
+
+
+    //  // plus utilisé
+    // /**
+    //  * @param $date,$theme
+    //  * @return Event[]
+    //  */
+    // public function findByTheme($date,$theme)
+    // {
+   
+    //     $qb = $this->createQueryBuilder('e')
+    //         ->where('e.date > :date')
+    //         ->andWhere('e.theme like :theme')
+    //         ->setParameter('date',$date )
+    //         ->setParameter('theme',"%".$theme."%" )
+    //         ->getQuery();
+
+    //     return $qb->execute();
+
+    // }
+
+    // nouveau filtre 
     /**
      * @param $date,$theme
      * @return Event[]
      */
-    public function findByTheme($date,$theme)
+    public function findByFilter($dateNow, $title, $place, $date, $theme)
     {
-        // automatically knows to select Products
-        // the "p" is an alias you'll use in the rest of the query
+   
         $qb = $this->createQueryBuilder('e')
-            ->where('e.date > :date')
+            ->where('e.date > :dateNow')
+            ->andWhere('e.title like :title')
             ->andWhere('e.theme like :theme')
-            ->setParameter('date',$date )
+            ->andWhere('e.place like :place')
+            ->andWhere('e.date > :date')
+            ->setParameter('dateNow',$dateNow )
             ->setParameter('theme',"%".$theme."%" )
+            ->setParameter('place',"%".$place."%" )
+            ->setParameter('date',$date)
+            ->setParameter('title',"%".$title."%" )
             ->getQuery();
 
         return $qb->execute();
 
-        // to get just one result:
-        // $product = $qb->setMaxResults(1)->getOneOrNullResult();
     }
 
 }

@@ -9,6 +9,8 @@ user.lastname: Nom
 user.firstname: Prénom
 event.list: 'Liste des événements'
 event.tri: 'Recherche avancée'
+event.filter: 'Filtrer'
+event.tri.description: "Remplissez vos critères"
 event.byplace: 'Par lieu'
 event.bydate: 'Par date'
 event.bytheme: 'Par thème'

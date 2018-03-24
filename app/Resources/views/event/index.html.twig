@@ -1,11 +1,13 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>{{'event.list'|trans}}</h1>
-    <div class="text-center">
-        <a class="btn btn-success " href="{{ path('event_new') }}">{{'event.create'|trans}}</a>
 
-    <h3>{{'event.tri'|trans}}</h3>
+    <h1 >{{'event.list'|trans}}</h1>
+    <div class="text-center">   
+    <div class="">
+        <a style="margin-right:2px;" class=" btn btn-success btn-lg" href="{{ path('event_new') }}">{{'event.create'|trans}}</a>
+
+        {# <h3>{{'event.tri'|trans}}</h3>
     <div class="row">
     <div class=" mx-auto card bg-secondary">
         <div class="card-body ">
@@ -50,9 +52,71 @@
         </div>
         </div>
     </div>
+    </div> #}
+        <button style="margin-left:2px;" onclick="toogle()" type="button" class=" btn btn-primary btn-lg">+ {{'event.tri'|trans}}</button>
+        </div>
+        <script>
+            function toogle(){
+                if(document.getElementById("eventFilter").hidden){
+                    document.getElementById("eventFilter").hidden=false;
+                    console.log("visible");
+                }else{
+                     document.getElementById("eventFilter").hidden=true;
+                     console.log("hidden");
+                }
+            }
+        </script>
+        <div id="eventFilter" class="row" style="margin-top:5px;" hidden>
+            <div class=" mx-auto card bg-secondary">
+                <div class="card-body ">
+                    <h5 class="text-white">{{'event.tri.description'|trans}}</h5>
+                    <form action="{{ path("event_filter" )}}" method="post">
+                        <div class="row">
+                            <div class="col">
+                                <div class=" form-group  ">
+                                    <div style="min-width:130px">
+                                       <label for="title " class="text-white">{{'event.title'|trans}}</label>
+                                        <input type="text" class="form-control " id="title" name="title"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class=" form-group  ">
+                                    <div style="min-width:130px">
+                                       <label for="place " class="text-white">{{'event.place'|trans}}</label>
+                                        <input type="text" class="form-control " id="place" name="place"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class=" form-group  ">
+                                    <div style="min-width:130px">
+                                        <label for="date " class="text-white">{{'event.date'|trans}}</label>
+                                        <input type="date" id="date" class=" form-control  " name="date"/>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group ">
+                                    <div style="min-width:130px">
+                                        <label for="theme " class="text-white">{{'event.theme'|trans}}</label>
+                                        <input type="text" id="theme" class=" form-control " name="theme"/>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <input class="btn btn-info btn-block" type="submit" value="{{'event.filter'|trans}}">
+                </form>
+            </div>
+        </div>
     </div>
 
     <br>
+     <div class="  mx-auto card bg-light">
+    <div class="card-body ">
     <table class="table table-striped">
         <thead>
             <tr>
@@ -68,38 +132,41 @@
         </thead>
         <tbody>
             {% for event in events %}
-          {#  affichage des evenements en cours #}
+                {#  affichage des evenements en cours #}
                 {# {% if date(event.date) > date(date_now) %} #}
-                    <tr>
-                        {# <td><a href="{{ path('event_show', { 'id': event.id }) }}">{{ event.id }}</a></td> #}
-                        <td>{{ event.title }}</td>
-                        {# <td>{{ event.description }}</td> #}
-                        {# <td>{{ event.nbPlace }}</td> #}
-                        <td>{{ event.theme }}</td>
-                        <td>
-                            {% if event.date %}{{ event.date|date('d/m/Y') }}
-                            {% endif %}
-                        </td>
-                        {# <td>{{ event.place }}</td> #}
-                        <td class="row">
+                <tr>
+                    {# <td><a href="{{ path('event_show', { 'id': event.id }) }}">{{ event.id }}</a></td> #}
+                    <td>{{ event.title }}</td>
+                    {# <td>{{ event.description }}</td> #}
+                    {# <td>{{ event.nbPlace }}</td> #}
+                    <td>{{ event.theme }}</td>
+                    <td>
+                        {% if event.date %}{{ event.date|date('d/m/Y') }}
+                        {% endif %}
+                    </td>
+                    {# <td>{{ event.place }}</td> #}
+                    <td class="row">
 
-                            {# affichage de edit uniquement si c'est l'utilisateur qui a creer l'evenement #}
+                        {# affichage de edit uniquement si c'est l'utilisateur qui a creer l'evenement #}
 
-                            <a class="btn btn-primary col" href="{{ path('event_show', { 'id': event.id }) }}">{{'event.show'|trans}}</a>
-                            {% if event.user.id == app.user.id or is_granted("ROLE_ADMIN") %}
+                        <a class="btn btn-primary col" href="{{ path('event_show', { 'id': event.id }) }}">{{'event.show'|trans}}</a>
+                        {% if event.user.id == app.user.id or is_granted("ROLE_ADMIN") %}
 
-                                <a class="btn btn-warning col " href="{{ path('event_edit', { 'id': event.id }) }}">{{'event.edit'|trans}}</a>
+                            <a class="btn btn-warning col " href="{{ path('event_edit', { 'id': event.id }) }}">{{'event.edit'|trans}}</a>
 
-                            {% endif %}
+                        {% endif %}
 
-                        </td>
-                    </tr>
+                    </td>
+                </tr>
                 {# {% endif %} #}
             {% endfor %}
         </tbody>
     </table>
-    <div class="text-center">
-        <a class="btn btn-success " href="{{ path('event_new') }}">{{'event.create'|trans}}</a>
+    </div>
+    </div>
+    <div class="text-center" style="margin-bottom:5px;margin-top:5px;">
+        <a class="btn btn-success btn-lg" href="{{ path('event_new') }}">{{'event.create'|trans}}</a>
 
     </div>
+  
 {% endblock %}
