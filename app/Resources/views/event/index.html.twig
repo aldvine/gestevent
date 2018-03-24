@@ -2,11 +2,11 @@
 
 {% block body %}
 
-    <h1 >{{'event.list'|trans}}</h1>
+    <h1 >{{'event.list'|trans}}</h1> <a href="{{ path('event_index') }}">{{'event.refresh'|trans}}</a>
     <div class="text-center">   
-    <div class="">
-        <a style="margin-right:2px;" class=" btn btn-success btn-lg" href="{{ path('event_new') }}">{{'event.create'|trans}}</a>
-
+    <div >
+        <a style="margin-right:2px;" class="btn btn-info btn-lg" href="{{ path('event_user') }}">{{'event.myevent'|trans}}</a>
+        <a style="margin-right:2px;" class="btn btn-success btn-lg" href="{{ path('event_new') }}">{{'event.create'|trans}}</a>
         {# <h3>{{'event.tri'|trans}}</h3>
     <div class="row">
     <div class=" mx-auto card bg-secondary">
@@ -53,8 +53,8 @@
         </div>
     </div>
     </div> #}
-        <button style="margin-left:2px;" onclick="toogle()" type="button" class=" btn btn-primary btn-lg">+ {{'event.tri'|trans}}</button>
-        </div>
+        <button  onclick="toogle()" type="button" class="btn btn-primary btn-lg">+ {{'event.tri'|trans}}</button>
+    </div>
         <script>
             function toogle(){
                 if(document.getElementById("eventFilter").hidden){

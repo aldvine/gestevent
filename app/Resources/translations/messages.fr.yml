@@ -8,8 +8,10 @@ listparticipant: 'Liste des participants'
 user.lastname: Nom
 user.firstname: Prénom
 event.list: 'Liste des événements'
+event.myevent: "Mes événements"
 event.tri: 'Recherche avancée'
 event.filter: 'Filtrer'
+event.refresh: 'Rafraichir'
 event.tri.description: "Remplissez vos critères"
 event.byplace: 'Par lieu'
 event.bydate: 'Par date'

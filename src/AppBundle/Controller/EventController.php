@@ -120,14 +120,8 @@ class EventController extends Controller
      */
     public function showByPlaceAction(Request $request)
     {
-
-
         $place = $request->request->get('place');
         $breadcrumbs = $this->getBreadcrumbs();
-   
-        
- // $em = $this->getDoctrine()->getManager();
-        // $events = $em->getRepository('AppBundle:Event')->findBy(array('place' => $place));
 
          // recuperation d'uniquement ceux à venir
         $events = $this->getDoctrine()
@@ -182,26 +176,22 @@ class EventController extends Controller
                 ->findAllGreaterThanDate(date('Y-m-d H:i:s'));
 
         } else {
-                   // $em = $this->getDoctrine()->getManager();
-        // $events = $em->getRepository('AppBundle:Event')->findBy(array('theme' => $theme));
-
          // recuperation d'uniquement ceux à venir
             $events = $this->getDoctrine()
                 ->getRepository('AppBundle:Event')
                 ->findByTheme(date('Y-m-d H:i:s'), $theme);
         }
 
-
         return $this->render('event/index.html.twig', array(
             'events' => $events,
         ));
     }
+    
     /**
-     * Finds and displays a event entity.
-     *
      * @Route("/Filter", name="event_filter")
      * @Method("POST")
      */
+    
     public function filterAction(Request $request)
     {
         $theme = $request->request->get('theme');
@@ -209,17 +199,33 @@ class EventController extends Controller
         $title = $request->request->get('title');
         $date = $request->request->get('date');
         $breadcrumbs = $this->getBreadcrumbs();
-
-        dump($request->request);
-    
-                   // $em = $this->getDoctrine()->getManager();
-        // $events = $em->getRepository('AppBundle:Event')->findBy(array('theme' => $theme));
+        $breadcrumbs->addRouteItem($this->get('translator')->trans('event.filter'), "event_filter");
 
          // recuperation d'uniquement ceux à venir
             $events = $this->getDoctrine()
                 ->getRepository('AppBundle:Event')
                 ->findByFilter(date('Y-m-d H:i:s'), $title, $place, $date, $theme);
 
+
+        return $this->render('event/index.html.twig', array(
+            'events' => $events,
+        ));
+    }
+    /**
+     *
+     * @Route("/list/MyEvent", name="event_user")
+     * @Method("GET")
+     */
+    public function myEventsAction()
+    {
+        
+        $breadcrumbs = $this->getBreadcrumbs();
+        $breadcrumbs->addRouteItem($this->get('translator')->trans('event.myevent'), "event_user");
+         // recuperation des evenement de l'utilsiateur
+        dump($this->getUser());
+            $events = $this->getDoctrine()
+                ->getRepository('AppBundle:Event')
+                ->findByUser(date('Y-m-d H:i:s'), $this->getUser());
 
         return $this->render('event/index.html.twig', array(
             'events' => $events,
@@ -238,8 +244,6 @@ class EventController extends Controller
         $editForm = $this->createForm('AppBundle\Form\EventType', $event);
         $editForm->handleRequest($request);
 
-
-
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
@@ -255,6 +259,7 @@ class EventController extends Controller
             'delete_form' => $deleteForm->createView(),
         ));
     }
+    // retourne le fil d'ariane de ce controlleur
     public function getBreadcrumbs()
     {
         $breadcrumbs = $this->get("white_october_breadcrumbs");

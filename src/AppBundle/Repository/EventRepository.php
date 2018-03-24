@@ -22,12 +22,51 @@ class EventRepository extends \Doctrine\ORM\EntityRepository
 
         $qb = $this->createQueryBuilder('e')
             ->andWhere('e.date > :date')
-            ->setParameter('date',$date )
+            ->setParameter('date', $date)
             ->getQuery();
 
         return $qb->execute();
 
 
+    }
+
+    
+    // nouveau filtre 
+    /**
+     * @param $date,$theme
+     * @return Event[]
+     */
+    public function findByFilter($dateNow, $title, $place, $date, $theme)
+    {
+        $qb = $this->createQueryBuilder('e')
+            ->where('e.date > :dateNow ')->setParameter('dateNow', $dateNow);
+        if (!empty($date)) {
+            $qb = $qb->andWhere('e.date >= :date')->setParameter('date', $date);
+        }
+        if (!empty($title)) {
+            $qb = $qb->andWhere('lower(e.title) like lower(:title)')->setParameter('title', "%" . $title . "%");
+        }
+        if (!empty($theme)) {
+            $qb = $qb->andWhere('lower(e.theme) like lower(:theme)')->setParameter('theme', "%" . $theme . "%");
+        }
+        if (!empty($place)) {
+            $qb = $qb->andWhere('lower(e.place) like lower(:place)')->setParameter('place', "%" . $place . "%");
+        }
+        $qb = $qb->getQuery();
+        return $qb->execute();
+    }
+    // par utilisateur
+    /**
+     * @param $date,$user
+     * @return Event[]
+     */
+    public function findByUser($dateNow,$user)
+    {
+        $qb = $this->createQueryBuilder('e')
+        ->andWhere('e.user = :user')
+        ->setParameter('user', $user)
+        ->getQuery();
+        return $qb->execute();
     }
 
     // // plus utilisé
@@ -69,29 +108,5 @@ class EventRepository extends \Doctrine\ORM\EntityRepository
 
     // }
 
-    // nouveau filtre 
-    /**
-     * @param $date,$theme
-     * @return Event[]
-     */
-    public function findByFilter($dateNow, $title, $place, $date, $theme)
-    {
-   
-        $qb = $this->createQueryBuilder('e')
-            ->where('e.date > :dateNow')
-            ->andWhere('e.title like :title')
-            ->andWhere('e.theme like :theme')
-            ->andWhere('e.place like :place')
-            ->andWhere('e.date > :date')
-            ->setParameter('dateNow',$dateNow )
-            ->setParameter('theme',"%".$theme."%" )
-            ->setParameter('place',"%".$place."%" )
-            ->setParameter('date',$date)
-            ->setParameter('title',"%".$title."%" )
-            ->getQuery();
-
-        return $qb->execute();
-
-    }
 
 }
