@@ -77,6 +77,12 @@ fos_user:
     from_email:
         address: "aldvine608@hotmail.fr"
         sender_name: "fosuser"
+    registration:
+        form:
+            type: AppBundle\Form\RegistrationType
+    profile:
+        form:
+            type: AppBundle\Form\ProfileType
     
 white_october_breadcrumbs:
     separator:          '>'
