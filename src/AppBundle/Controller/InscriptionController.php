@@ -18,7 +18,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 class InscriptionController extends Controller
 {
     /**
-     * Lists all inscription entities.
+     * Liste de toutes les inscriptions
      *
      * @Route("/", name="inscription_index")
      * @Method("GET")
@@ -27,10 +27,13 @@ class InscriptionController extends Controller
     {
         
         $em = $this->getDoctrine()->getManager();
-        // liste uniquement de ses inscriptions
+        // liste uniquement de ses propres inscriptions
         $inscriptions = $em->getRepository('AppBundle:Inscription')->findBy(array('user' => $this->getUser()));
+        
         $events = new ArrayCollection();
+        // fil ariane
         $breadcrumbs = $this->getBreadcrumbs();
+        // pour toutes les inscriptions recuperation des evenement correspondants.
         foreach($inscriptions as $inscription){
             $event = $em->getRepository('AppBundle:Event')->findOneBy(array('id' => $inscription->getEvent()->getId()));
             $id = $inscription->getId();
@@ -42,6 +45,7 @@ class InscriptionController extends Controller
             'events' => $events,
         ));
     }
+    // fil ariane du controleur
     public function getBreadcrumbs(){
         $breadcrumbs = $this->get("white_october_breadcrumbs");
         // Simple example
@@ -49,6 +53,7 @@ class InscriptionController extends Controller
         return $breadcrumbs;
     }
     /**
+     * 
      * Creates a new inscription entity.
      *
      * @Route("/new/{id}", name="inscription_new")
@@ -57,12 +62,14 @@ class InscriptionController extends Controller
     public function newAction($id)
     {
         $em = $this->getDoctrine()->getManager();
+        // recuperation de l'evenement
         $event = $em->getRepository('AppBundle:Event')->findOneBy(array('id' => $id));
+        // verification d'une eventuelle isncription identique deja presente
         $resp = $em->getRepository('AppBundle:Inscription')->findOneBy(array('user' => $this->getUser(),'event'=>$event));
-
+        // compteur du nombre d'inscriptions
         $inscriptions = $em->getRepository('AppBundle:Inscription')->findBy(array('event' => $id));
         $nbindividu = count($inscriptions);
-
+        // veriifcation que l'inscription n'est pas déjà faite , si ok enregistrement
         if(empty($resp) && $nbindividu<$event->getNbPlace()){
             $inscription = new Inscription();
             $inscription->setDate(date_create());
@@ -85,22 +92,27 @@ class InscriptionController extends Controller
      */
     public function showAction(Inscription $inscription)
     {
+        // creation formulaire de désinscription
         $deleteForm = $this->createDeleteForm($inscription);
 
-        
         $em = $this->getDoctrine()->getManager();
+        // recuperation de l'evenement de l'inscription
         $event = $em->getRepository('AppBundle:Event')->findOneBy(array('id' => $inscription->getEvent()->getId()));
+        //recuperation de toutes les inscriptions
         $inscriptions = $em->getRepository('AppBundle:Inscription')->findBy(array('event' => $event->getId()));
         $users = new ArrayCollection();
+        // pour toutes ces inscriptions on ajoutes les utilisateurs dans un tableau pour 
+        // qui corresponds aux différents participants
         foreach($inscriptions as $inscription){
             $user = $em->getRepository('AppBundle:User')->findOneBy(array('id' => $inscription->getUser()->getId()));
             $users[] = $user;
         }
+        // fil ariane
         $breadcrumbs = $this->getBreadcrumbs();
         $breadcrumbs->addRouteItem($this->get('translator')->trans('inscription').' '.$inscription->getId(), "inscription_show",[
             'id' => $inscription->getId(),
         ]);
-        
+        // rendu vue
         return $this->render('inscription/show.html.twig', array(
             'users' => $users,
             'event' => $event,
@@ -117,6 +129,7 @@ class InscriptionController extends Controller
      */
     public function editAction(Request $request, Inscription $inscription)
     {
+        // fonction non utilisé mais généré par la commande CRUD
         $deleteForm = $this->createDeleteForm($inscription);
         $editForm = $this->createForm('AppBundle\Form\InscriptionType', $inscription);
         $editForm->handleRequest($request);
@@ -142,11 +155,11 @@ class InscriptionController extends Controller
      */
     public function deleteAction(Request $request, $id)
     {
-      
+      // désinscription
         $em = $this->getDoctrine()->getManager();
         $inscription = $em->getRepository('AppBundle:Inscription')->findOneBy(array('id' => $id));
-        dump($inscription);
-      
+       
+        // si inscription existe on la supprime
         if(!empty($inscription)){
             
             $em->remove($inscription);

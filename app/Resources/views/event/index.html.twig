@@ -7,55 +7,11 @@
     <div >
         <a style="margin-right:2px;" class="btn btn-info btn-lg" href="{{ path('event_user') }}">{{'event.myevent'|trans}}</a>
         <a style="margin-right:2px;" class="btn btn-success btn-lg" href="{{ path('event_new') }}">{{'event.create'|trans}}</a>
-        {# <h3>{{'event.tri'|trans}}</h3>
-    <div class="row">
-    <div class=" mx-auto card bg-secondary">
-        <div class="card-body ">
-        <div class="row">
-            <div class="col">
-                <form action="{{ path("event_showByPlace" )}} "   method="post">
-                    <div class=" form-group  ">
-                        <div>
-                            <input type="text" class="form-control " id="place" name="place"/>
-                        </div>
-                        <div >
-                            <input class="btn btn-info btn-block " type="submit" value="{{'event.byplace'|trans}}">
-                        </div>
-                    </div>
-                </form>
-            </div>
-             <div class="col">
-                <form action="{{ path("event_showByDate" )}} "   method="post">
-                    <div class=" form-group  ">
-                        <div >
-                            <input type="date" id="date" class=" form-control  " name="date"/>
-                        </div>
-                        <div >
-                            <input class="btn btn-info btn-block  " type="submit" value="{{'event.bydate'|trans}}">
-                        </div>
-                    </div>
-                </form>
-            </div>
-                <div class="col" >
-                    <form action="{{ path("event_showByTheme" )}}"  method="post">
-                        <div class="form-group ">
-                            <div>
-                                <input type="text" id="theme" class=" form-control " name="theme"/>
-                            </div>
-                            <div>
-                                <input class="btn btn-info btn-block" type="submit" value="{{'event.bytheme'|trans}}">
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-        </div>
-    </div>
-    </div> #}
+       
         <button  onclick="toogle()" type="button" class="btn btn-primary btn-lg">+ {{'event.tri'|trans}}</button>
     </div>
         <script>
+        // js pour l'affichage du formulaire de filtre
             function toogle(){
                 if(document.getElementById("eventFilter").hidden){
                     document.getElementById("eventFilter").hidden=false;

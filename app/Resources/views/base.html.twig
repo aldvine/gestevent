@@ -9,7 +9,7 @@
 
         {% block stylesheets %}
             <!-- Latest compiled and minified CSS -->
-
+            {#  si pa de style on prends celui par defaut sinon on prend ceului stocké dans la session #}
             {% if app.session.get('style')is empty %}
                 <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
 
@@ -33,6 +33,7 @@
         </style>
        
         {% include 'default/home.html.twig' %}
+        {# fil ariane #}
          {{ wo_render_breadcrumbs() }}
     <br>
         <div class="container ">

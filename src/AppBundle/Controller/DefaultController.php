@@ -15,7 +15,7 @@ use Symfony\Component\HttpFoundation\Response;
  * @Route("/")
  * 
  */
-
+// affichage de l'accueil
 class DefaultController extends Controller
 {
     /**
@@ -23,6 +23,7 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
+        // fil d'ariane
         $breadcrumbs = $this->getBreadcrumbs();
     
         
@@ -30,16 +31,16 @@ class DefaultController extends Controller
             'base_dir' => realpath($this->getParameter('kernel.project_dir')) . DIRECTORY_SEPARATOR,
         ]);
     }
-    
+    // fil d'ariane
     public function getBreadcrumbs(){
         $breadcrumbs = $this->get("white_october_breadcrumbs");
-        // Simple example
+        // ajout d'une route
         $breadcrumbs->addRouteItem($this->get('translator')->trans('home'), "homepage");
         return $breadcrumbs;
     }
 
     /**
-     * Change the locale for the current user
+     * Change la locale pour l'utilisateur
      *
      * @Route("/locale/{locale}", name="setlocale")
      * 
@@ -53,16 +54,16 @@ class DefaultController extends Controller
         return $this->redirectToRoute('homepage');
     }
     /**
-     * Change the locale for the current user
+     * Change le theme pour l'utilisiateur
      *
      * @Route("/theme/{style}", name="setTheme")
      * 
      */
     public function setThemeAction(Request $request, $style = "null")
     {
-
+        // si style saisie
         if ($style != null) {
-           // On enregistre la langue en session
+           // On enregistre le theme en session
             $request->getSession()->set('style', 'css/' . $style . '.css');
             // dump($request->getSession());
         }

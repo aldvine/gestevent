@@ -41,7 +41,7 @@ class EventRepository extends \Doctrine\ORM\EntityRepository
         $qb = $this->createQueryBuilder('e')
             ->where('e.date > :dateNow ')->setParameter('dateNow', $dateNow);
         if (!empty($date)) {
-            $qb = $qb->andWhere('e.date >= :date')->setParameter('date', $date);
+            $qb = $qb->andWhere('e.date = :date')->setParameter('date', $date);
         }
         if (!empty($title)) {
             $qb = $qb->andWhere('lower(e.title) like lower(:title)')->setParameter('title', "%" . $title . "%");

@@ -51,13 +51,18 @@ class EventController extends Controller
      */
     public function newAction(Request $request)
     {
+        
         $event = new Event();
+
+        // création du formaulaire
         $form = $this->createForm('AppBundle\Form\EventType', $event);
         $form->handleRequest($request);
+
+        // fil d'ariane
         $breadcrumbs = $this->getBreadcrumbs();
         $breadcrumbs->addRouteItem($this->get('translator')->trans('event.create'), "event_new");
 
-
+        // validation du formulaire
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
 
@@ -70,7 +75,7 @@ class EventController extends Controller
 
             return $this->redirectToRoute('event_show', array('id' => $event->getId()));
         }
-
+        // rendu de la vue
         return $this->render('event/new.html.twig', array(
             'event' => $event,
             'form' => $form->createView(),
@@ -85,24 +90,28 @@ class EventController extends Controller
      */
     public function showAction(Event $event)
     {
+
         $deleteForm = $this->createDeleteForm($event);
-
-
-
+        // recherche des inscriptions lié à l'evenement
         $em = $this->getDoctrine()->getManager();
         $inscriptions = $em->getRepository('AppBundle:Inscription')->findBy(array('event' => $event->getId()));
+       // compteur d'inscription qui sert au calcul du nombre de place restante dans la vue
         $nbindividu = count($inscriptions);
-        $users = new ArrayCollection();
-        foreach ($inscriptions as $inscription) {
 
+        $users = new ArrayCollection();
+// pour toutes les inscriptions on ajoutes l'utilisateur dans le tableau
+        foreach ($inscriptions as $inscription) {
+            // recuperation de l'utilisateur
             $user = $em->getRepository('AppBundle:User')->findOneBy(array('id' => $inscription->getUser()->getId()));
             $id = $inscription->getId();
             $users["$id"] = $user;
         }
+        // fil d'ariane
         $breadcrumbs = $this->getBreadcrumbs();
         $breadcrumbs->addRouteItem($this->get('translator')->trans('event.show'), "event_show", [
             'id' => $event->getId(),
         ]);
+            // rendu de la vue 
         return $this->render('event/show.html.twig', array(
             'users' => $users,
             'event' => $event,
@@ -112,7 +121,7 @@ class EventController extends Controller
     }
 
     /**
-     * Finds and displays a event entity.
+     * plus utilisé
      *
      * @Route("/Byplace", name="event_showByPlace")
      * @Method("POST")
@@ -120,6 +129,7 @@ class EventController extends Controller
      */
     public function showByPlaceAction(Request $request)
     {
+        // fonction plus utilisé remplace par filterAction
         $place = $request->request->get('place');
         $breadcrumbs = $this->getBreadcrumbs();
 
@@ -142,6 +152,7 @@ class EventController extends Controller
      */
     public function showByDateAction(Request $request)
     {
+           // fonction plus utilisé remplace par filterAction
         $date = $request->request->get('date');
         $Events = $this->getDoctrine()->getRepository('AppBundle:Event')->findAllGreaterThanDate(date('Y-m-d H:i:s'));
         $events = new ArrayCollection();
@@ -166,6 +177,7 @@ class EventController extends Controller
      */
     public function showByThemeAction(Request $request)
     {
+           // fonction plus utilisé remplace par filterAction
         $theme = $request->request->get('theme');
         $breadcrumbs = $this->getBreadcrumbs();
 
@@ -194,14 +206,17 @@ class EventController extends Controller
     
     public function filterAction(Request $request)
     {
+        // recuperation des informations saisie
         $theme = $request->request->get('theme');
         $place = $request->request->get('place');
         $title = $request->request->get('title');
         $date = $request->request->get('date');
+
+        // fil d'ariane
         $breadcrumbs = $this->getBreadcrumbs();
         $breadcrumbs->addRouteItem($this->get('translator')->trans('event.filter'), "event_filter");
 
-         // recuperation d'uniquement ceux à venir
+         // recuperation d'uniquement ceux à venir avec les filtres
             $events = $this->getDoctrine()
                 ->getRepository('AppBundle:Event')
                 ->findByFilter(date('Y-m-d H:i:s'), $title, $place, $date, $theme);
@@ -212,47 +227,50 @@ class EventController extends Controller
         ));
     }
     /**
-     *
+     *  affiche les evenement de l'utilisateur connecté
      * @Route("/list/MyEvent", name="event_user")
      * @Method("GET")
      */
     public function myEventsAction()
     {
-        
+        // fil d'ariane
         $breadcrumbs = $this->getBreadcrumbs();
         $breadcrumbs->addRouteItem($this->get('translator')->trans('event.myevent'), "event_user");
          // recuperation des evenement de l'utilsiateur
-        dump($this->getUser());
             $events = $this->getDoctrine()
                 ->getRepository('AppBundle:Event')
                 ->findByUser(date('Y-m-d H:i:s'), $this->getUser());
-
+        // rendu vue
         return $this->render('event/index.html.twig', array(
             'events' => $events,
         ));
     }
 
     /**
-     * Displays a form to edit an existing event entity.
+     * affiche un formulaire pour editer un evenement
      *
      * @Route("/{id}/edit", name="event_edit")
      * @Method({"GET", "POST"})
      */
     public function editAction(Request $request, Event $event)
     {
+        // creation du formulaire de suppression (un bouton)
         $deleteForm = $this->createDeleteForm($event);
+        // creation formualaire modification
         $editForm = $this->createForm('AppBundle\Form\EventType', $event);
         $editForm->handleRequest($request);
-
+        // verification des champs et du formulaire en général
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
-
+            // redirection
             return $this->redirectToRoute('event_edit', array('id' => $event->getId()));
         }
+        // fil d'ariane
         $breadcrumbs = $this->getBreadcrumbs();
         $breadcrumbs->addRouteItem($this->get('translator')->trans('event.edit'), "event_edit", [
             'id' => $event->getId(),
         ]);
+        // rendu
         return $this->render('event/edit.html.twig', array(
             'event' => $event,
             'edit_form' => $editForm->createView(),
@@ -269,22 +287,23 @@ class EventController extends Controller
     }
 
     /**
-     * Deletes a event entity.
+     * Supprime un evenement
      *
      * @Route("/{id}", name="event_delete")
      * @Method("DELETE")
      */
     public function deleteAction(Request $request, Event $event)
     {
+        // creation de formualaire suppression
         $form = $this->createDeleteForm($event);
         $form->handleRequest($request);
-
+        // vérification formualaire et suppression  evenement
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->remove($event);
             $em->flush();
         }
-
+        // redirection
         return $this->redirectToRoute('event_index');
     }
 
