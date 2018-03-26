@@ -5,30 +5,30 @@
     </button>
     <div class="collapse navbar-collapse " id="navbarNav">
         <ul class="navbar-nav">
-         {% if is_granted("ROLE_USER") %}
-            <li class="nav-item ">
-                <a class="nav-link" href="{{ path('homepage') }}">{{'home'|trans}}
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ path('event_index') }}">{{'events'|trans}}</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ path('inscription_index') }}">{{'myinscriptions'|trans}}</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ path('fos_user_profile_show') }}">{{'myprofile'|trans}}</a>
-            </li>
+            {% if is_granted("ROLE_USER") %}
+                <li class="nav-item ">
+                    <a class="nav-link" href="{{ path('homepage') }}">{{'home'|trans}}
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('event_index') }}">{{'events'|trans}}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('inscription_index') }}">{{'myinscriptions'|trans}}</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('fos_user_profile_show') }}">{{'myprofile'|trans}}</a>
+                </li>
 
-            <li class="nav-item">
-                <a class="nav-link" href="{{ path('fos_user_security_logout') }}">{{'logout'|trans}}</a>
-            </li>
-         {% else %}
-             <li class="nav-item">
-                <a class="nav-link" href="{{ path('fos_user_registration_register') }}">{{'register'|trans}}</a>
-            </li>
-         {% endif %}
-           
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('fos_user_security_logout') }}">{{'logout'|trans}}</a>
+                </li>
+            {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('fos_user_registration_register') }}">{{'register'|trans}}</a>
+                </li>
+            {% endif %}
+
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     {{'language'|trans}}
@@ -39,28 +39,27 @@
 
                 </div>
             </li>
-             {% if is_granted("ROLE_USER") %}
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    {{'theme'|trans}}
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="{{ path('setTheme',{'style':'sandstone'}) }}">sandstone</a>
-                    <a class="dropdown-item" href="{{ path('setTheme',{'style':'superhero'}) }}">superhero</a>
-                    <a class="dropdown-item" href="{{ path('setTheme',{'style':'bootstrap'}) }}">bootstrap</a>
-                    <a class="dropdown-item" href="{{ path('setTheme',{'style':'lux'}) }}">lux</a>
-                    <a class="dropdown-item" href="{{ path('setTheme',{'style':'materia'}) }}">materia</a>
-                    <a class="dropdown-item" href="{{ path('setTheme',{'style':'cerulean'}) }}">cerulean</a>
-                    <a class="dropdown-item" href="{{ path('setTheme',{'style':'sketchy'}) }}">sketchy</a>
-                </div>
-            </li>
+            {% if is_granted("ROLE_USER") %}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {{'theme'|trans}}
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="{{ path('setTheme',{'style':'sandstone'}) }}">sandstone</a>
+                        <a class="dropdown-item" href="{{ path('setTheme',{'style':'superhero'}) }}">superhero</a>
+                        <a class="dropdown-item" href="{{ path('setTheme',{'style':'bootstrap'}) }}">bootstrap</a>
+                        <a class="dropdown-item" href="{{ path('setTheme',{'style':'lux'}) }}">lux</a>
+                        <a class="dropdown-item" href="{{ path('setTheme',{'style':'materia'}) }}">materia</a>
+                        <a class="dropdown-item" href="{{ path('setTheme',{'style':'cerulean'}) }}">cerulean</a>
+                        <a class="dropdown-item" href="{{ path('setTheme',{'style':'sketchy'}) }}">sketchy</a>
+                    </div>
+                </li>
 
             {% endif %}
             <li class="nav-item">
                 <a class="nav-link" href="{{ path('getFluxRss') }}">{{'rss'|trans}}</a>
             </li>
-        
-        
+
         </ul>
     </div>
 </nav>
